@@ -1,14 +1,29 @@
 import React from 'react';
 
 import AppHeader from '../app-header/app-header';
+import BurgerIngredients from '../burger-ingredients/burger-ingredients';
+import BurgerConstructor from '../burger-constructor/burger-constructor';
+import DATA from '../../utils/data';
 
-function App() {
-  return (
-    <div className='wrapper'>
-      <AppHeader />
-      <h1>React App</h1>
-    </div>
-  );
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = { DATA };
+  }
+
+
+  render() {
+
+    return (
+      <div className='wrapper'>
+        <AppHeader />
+        <main className='main container'>
+          <BurgerIngredients data={DATA} />
+          <BurgerConstructor />
+        </main>
+      </div>
+    );
+  }
 }
 
 export default App;
