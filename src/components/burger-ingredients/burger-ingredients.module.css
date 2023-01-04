@@ -1,0 +1,28 @@
+.ingredients {
+  flex: 1;
+}
+
+.tabs {
+  display: flex;
+}
+
+.tabs li {
+  flex: 1;
+}
+
+.list-wrapper {
+  height: 65vh;
+  overflow: auto;
+}
+
+.list-wrapper::-webkit-scrollbar {
+  width: 8px;
+}
+
+.list-wrapper::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+
+.list-wrapper::-webkit-scrollbar-thumb {
+  background-color: #8585AD;
+}
