@@ -33,6 +33,7 @@
 }
 
 .constructor-element-wrapper {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -50,4 +51,10 @@
   display: flex;
   align-items: center;
   gap: 9.5px;
+}
+
+.element-top, .element-bottom {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
 }

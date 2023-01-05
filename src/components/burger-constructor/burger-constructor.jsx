@@ -1,76 +1,47 @@
 import ConstructorStyles from './burger-constructor.module.css';
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
-function BurgerConstructor() {
+function BurgerConstructor(props) {
+  const bun = props.data.find((el) => el.type === 'bun');
+  const ingredients = props.data.filter((el) => el.type !== 'bun');
+
+  console.log(ingredients);
+
   return (
     <div className={ConstructorStyles.constructor}>
       <div className={`${ConstructorStyles['constructor-main']}`}>
-        <div className="mb-4 pr-4">
+        <div className={`mb-4 pr-4 ${ConstructorStyles['element-top']}`}>
           <ConstructorElement
             type="top"
             isLocked={true}
-            text="Краторная булка N-200i (верх)"
-            price={200}
-            thumbnail='https://code.s3.yandex.net/react/code/meat-01.png'
+            text={bun.name}
+            price={bun.price}
+            thumbnail={bun.image}
           />
         </div>
         <ul className={ConstructorStyles['constructor-list']}>
-          <li className={ConstructorStyles['constructor-element-wrapper']}>
-            <DragIcon type="primary" />
-            <ConstructorElement
-              text="Краторная булка N-200i (верх)"
-              price={50}
-              thumbnail='https://code.s3.yandex.net/react/code/meat-01.png'
-            />
-          </li>
-          <li className={ConstructorStyles['constructor-element-wrapper']}>
-            <DragIcon type="primary" />
-            <ConstructorElement
-              text="Краторная булка N-200i (верх)"
-              price={50}
-              thumbnail='https://code.s3.yandex.net/react/code/meat-01.png'
-            />
-          </li>
-          <li className={ConstructorStyles['constructor-element-wrapper']}>
-            <DragIcon type="primary" />
-            <ConstructorElement
-              text="Краторная булка N-200i (верх)"
-              price={50}
-              thumbnail='https://code.s3.yandex.net/react/code/meat-01.png'
-            />
-          </li>
-          <li className={ConstructorStyles['constructor-element-wrapper']}>
-            <DragIcon type="primary" />
-            <ConstructorElement
-              text="Краторная булка N-200i (верх)"
-              price={50}
-              thumbnail='https://code.s3.yandex.net/react/code/meat-01.png'
-            />
-          </li>
-          <li className={ConstructorStyles['constructor-element-wrapper']}>
-            <DragIcon type="primary" />
-            <ConstructorElement
-              text="Краторная булка N-200i (верх)"
-              price={50}
-              thumbnail='https://code.s3.yandex.net/react/code/meat-01.png'
-            />
-          </li>
-          <li className={ConstructorStyles['constructor-element-wrapper']}>
-            <DragIcon type="primary" />
-            <ConstructorElement
-              text="Краторная булка N-200i (верх)"
-              price={50}
-              thumbnail='https://code.s3.yandex.net/react/code/meat-01.png'
-            />
-          </li>
+          {
+            ingredients.map((el) => {
+              return (
+                <li className={ConstructorStyles['constructor-element-wrapper']}>
+                  <DragIcon type="primary" />
+                  <ConstructorElement
+                    text={el.name}
+                    price={el.price}
+                    thumbnail={el.image}
+                  />
+                </li>
+              )
+            })
+          }
         </ul>
-        <div className="mt-4 pr-4">
+        <div className={`mt-4 pr-4 ${ConstructorStyles['element-bottom']}`}>
           <ConstructorElement
             type="bottom"
             isLocked={true}
-            text="Краторная булка N-200i (низ)"
-            price={200}
-            thumbnail='https://code.s3.yandex.net/react/code/meat-01.png'
+            text={bun.name}
+            price={bun.price}
+            thumbnail={bun.image}
           />
         </div>
       </div>
