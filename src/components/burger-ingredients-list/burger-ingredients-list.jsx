@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import BurgerIngredientsCard from "../burger-ingredients-card/burger-ingredients-card";
 import BurgerListStyles from './burger-list.module.css';
 
@@ -17,6 +18,10 @@ function BurgerIngredientsList(props) {
       </ul>
     </div>
   )
+}
+
+BurgerIngredientsList.propTypes = {
+  ingredients: PropTypes.arrayOf(PropTypes.object),
 }
 
 export default BurgerIngredientsList;

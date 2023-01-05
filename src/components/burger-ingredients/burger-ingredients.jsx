@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerIngredientsList from '../burger-ingredients-list/burger-ingredients-list';
 import ingredientsStyles from './burger-ingredients.module.css';
@@ -22,6 +23,10 @@ function BurgerIngredients(props) {
 
     </div>
   )
+}
+
+BurgerIngredients.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object),
 }
 
 export default BurgerIngredients; 
