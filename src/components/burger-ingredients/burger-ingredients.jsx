@@ -4,9 +4,9 @@ import BurgerIngredientsList from '../burger-ingredients-list/burger-ingredients
 import ingredientsStyles from './burger-ingredients.module.css';
 
 function BurgerIngredients(props) {
-  const bun = props.data.filter((el) => el.type === 'bun');
-  const main = props.data.filter((el) => el.type === 'main');
-  const sauce = props.data.filter((el) => el.type === 'sauce');
+  const buns = props.data.filter((el) => el.type === 'bun');
+  const mains = props.data.filter((el) => el.type === 'main');
+  const sauces = props.data.filter((el) => el.type === 'sauce');
   return (
     <div className={ingredientsStyles.ingredients}>
       <h1 className='text text_type_main-large pt-10'>Соберите бургер</h1>
@@ -16,9 +16,9 @@ function BurgerIngredients(props) {
         <li><Tab>Начинки</Tab></li>
       </ul>
       <div className={ingredientsStyles['list-wrapper']}>
-        <BurgerIngredientsList ingredients={bun} title="Булки" />
-        <BurgerIngredientsList ingredients={sauce} title="Соусы" />
-        <BurgerIngredientsList ingredients={main} title="Начинки" />
+        <BurgerIngredientsList ingredients={buns} title="Булки" />
+        <BurgerIngredientsList ingredients={sauces} title="Соусы" />
+        <BurgerIngredientsList ingredients={mains} title="Начинки" />
       </div>
 
     </div>
