@@ -5,8 +5,6 @@ function BurgerConstructor(props) {
   const bun = props.data.find((el) => el.type === 'bun');
   const ingredients = props.data.filter((el) => el.type !== 'bun');
 
-  console.log(ingredients);
-
   return (
     <div className={ConstructorStyles.constructor}>
       <div className={`${ConstructorStyles['constructor-main']}`}>
@@ -23,7 +21,7 @@ function BurgerConstructor(props) {
           {
             ingredients.map((el) => {
               return (
-                <li className={ConstructorStyles['constructor-element-wrapper']}>
+                <li key={el._id} className={ConstructorStyles['constructor-element-wrapper']}>
                   <DragIcon type="primary" />
                   <ConstructorElement
                     text={el.name}
