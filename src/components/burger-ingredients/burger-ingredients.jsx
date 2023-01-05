@@ -4,9 +4,10 @@ import BurgerIngredientsList from '../burger-ingredients-list/burger-ingredients
 import ingredientsStyles from './burger-ingredients.module.css';
 
 function BurgerIngredients(props) {
-  const buns = props.data.filter((el) => el.type === 'bun');
-  const mains = props.data.filter((el) => el.type === 'main');
-  const sauces = props.data.filter((el) => el.type === 'sauce');
+  const { data } = props;
+  const buns = data.filter((el) => el.type === 'bun');
+  const mains = data.filter((el) => el.type === 'main');
+  const sauces = data.filter((el) => el.type === 'sauce');
   return (
     <div className={ingredientsStyles.ingredients}>
       <h1 className='text text_type_main-large pt-10'>Соберите бургер</h1>
@@ -26,7 +27,7 @@ function BurgerIngredients(props) {
 }
 
 BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object),
+  data: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
 }
 
 export default BurgerIngredients; 
