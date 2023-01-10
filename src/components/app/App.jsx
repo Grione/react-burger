@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
-import DATA from '../../utils/data';
 
 const URL = 'https://norma.nomoreparties.space/api/ingredients';
 
