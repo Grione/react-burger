@@ -1,4 +1,5 @@
 import ingredientDetailsStyles from './ingredient-details.module.css';
+import { ingredientPropTypes } from '../../utils/propTypes';
 
 function OrderDetails(props) {
   const { name, image_large } = props.data;
@@ -34,5 +35,10 @@ function OrderDetails(props) {
     </div>
   )
 }
+
+OrderDetails.propTypes = {
+  data: ingredientPropTypes.isRequired,
+}
+
 
 export default OrderDetails; 
