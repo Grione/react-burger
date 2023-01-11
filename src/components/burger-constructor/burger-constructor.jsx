@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { ingredientPropTypes } from '../../utils/propTypes';
 import ConstructorStyles from './burger-constructor.module.css';
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-
+import { orderData } from '../../utils/order-data';
 function BurgerConstructor(props) {
   const bun = props.data.find((el) => el.type === 'bun');
   const ingredients = props.data.filter((el) => el.type !== 'bun');
@@ -50,7 +50,7 @@ function BurgerConstructor(props) {
           <span className='text text_type_digits-medium'>610</span>
           <CurrencyIcon type="primary" />
         </div>
-        <Button htmlType="button" type="primary" size="large" onClick={() => { props.openModal('order') }}>
+        <Button htmlType="button" type="primary" size="large" onClick={() => { props.openModal('order', orderData) }}>
           Оформить заказ
         </Button>
       </div>
