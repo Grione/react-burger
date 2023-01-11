@@ -50,7 +50,7 @@ function BurgerConstructor(props) {
           <span className='text text_type_digits-medium'>610</span>
           <CurrencyIcon type="primary" />
         </div>
-        <Button htmlType="button" type="primary" size="large">
+        <Button htmlType="button" type="primary" size="large" onClick={() => { props.openModal('order') }}>
           Оформить заказ
         </Button>
       </div>
@@ -60,6 +60,7 @@ function BurgerConstructor(props) {
 
 BurgerConstructor.propTypes = {
   data: PropTypes.arrayOf(ingredientPropTypes.isRequired).isRequired,
+  openModal: PropTypes.func.isRequired,
 }
 
 export default BurgerConstructor;
