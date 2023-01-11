@@ -42,36 +42,32 @@ function App() {
   const { data, isLoading, hasError } = state;
 
   return (
-    <>
-      <div className='wrapper'>
-        <AppHeader />
-        <main className='main container'>
-          {isLoading && 'Loading...'}
-          {hasError && 'Erron defined'}
-          {
-            !isLoading && !hasError && (
-              <>
-                <BurgerIngredients data={data} openModal={openModal} />
-                <BurgerConstructor data={data} openModal={openModal} />
-              </>
-            )
+    <div className='wrapper'>
+      <AppHeader />
+      <main className='main container'>
+        {isLoading && 'Loading...'}
+        {hasError && 'Erron defined'}
+        {
+          !isLoading && !hasError && (
+            <>
+              <BurgerIngredients data={data} openModal={openModal} />
+              <BurgerConstructor data={data} openModal={openModal} />
+            </>
+          )
 
-          }
-        </main>
-      </div>
+        }
+      </main>
       {modalState.isOpen &&
-        <Modal title={modalState.typeModal === 'ingredient' ? 'Детали ингредиента' : '' } show={modalState.isOpen} close={closeModal}>
+        <Modal title={modalState.typeModal === 'ingredient' ? 'Детали ингредиента' : ''} show={modalState.isOpen} close={closeModal}>
           {modalState.typeModal === 'ingredient' && (
             <IngredientDetails data={modalState.data} />
           )}
           {modalState.typeModal === 'order' &&
-            <OrderDetails />
+            <OrderDetails id={modalState.data.id} />
           }
         </Modal>
       }
-
-    </>
-
+    </div>
   );
 }
 

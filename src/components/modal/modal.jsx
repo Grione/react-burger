@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import modalStyles from './modal.module.css';
 import { useEffect } from 'react';
+import ReactDOM from 'react-dom';
 
+const root = document.querySelector('#root');
 function Modal(props) {
   const { title, show, close } = props;
 
@@ -25,8 +27,8 @@ function Modal(props) {
 
   }, [show, close])
 
-  return (
-    <>
+  return ReactDOM.createPortal(
+    (<>
       {show && <>
         <div className={`${modalStyles.modal} p-10 pb-15`}>
           <div className={modalStyles.header}>
@@ -40,7 +42,7 @@ function Modal(props) {
         <ModalOverlay closeHandler={close} />
       </>}
 
-    </>
+    </>), root
   )
 }
 
