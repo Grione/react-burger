@@ -6,28 +6,20 @@ import BurgerConstructor from '../burger-constructor/burger-constructor';
 import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import OrderDetails from '../order-details/order-details';
-
-const URL = 'https://norma.nomoreparties.space/api/ingredients';
+import getIngredients from '../../utils/burger-api'
 
 function App() {
   const [state, setState] = useState({ data: [], isLoading: true, hasError: false });
   const [modalState, setModalState] = useState({ isOpen: false, typeModal: null, data: {} });
 
   useEffect(() => {
-    const getIngredientData = async () => {
-      setState({ ...state, hasError: false, isLoading: true });
-
-      try {
-        const response = await fetch(URL);
-        const data = await response.json();
-
-        setState({ ...state, data: data.data, isLoading: false });
-      } catch (error) {
+    getIngredients().then((data) => {
+      if (data) {
+        setState({ ...state, data: data.data, isLoading: false })
+      } else {
         setState({ ...state, hasError: true, isLoading: false })
       }
-    }
-
-    getIngredientData();
+    });
 
   }, []);
 
