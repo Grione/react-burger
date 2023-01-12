@@ -3,8 +3,9 @@ import { ingredientPropTypes } from '../../utils/propTypes';
 import BurgerIngredientsCard from "../burger-ingredients-card/burger-ingredients-card";
 import BurgerListStyles from './burger-list.module.css';
 
+
 function BurgerIngredientsList(props) {
-  const { title, ingredients, openModal } = props;
+  const { title, ingredients } = props;
 
   return (
     <div className='pb-10'>
@@ -13,7 +14,7 @@ function BurgerIngredientsList(props) {
         {
           ingredients.map((el) => {
             return (
-              <BurgerIngredientsCard card={el} key={el._id} openModal={openModal} />
+              <BurgerIngredientsCard card={el} key={el._id} />
             )
           })
         }
@@ -26,7 +27,6 @@ function BurgerIngredientsList(props) {
 BurgerIngredientsList.propTypes = {
   title: PropTypes.string.isRequired,
   ingredients: PropTypes.arrayOf(ingredientPropTypes.isRequired).isRequired,
-  openModal: PropTypes.func.isRequired,
 }
 
 export default BurgerIngredientsList;

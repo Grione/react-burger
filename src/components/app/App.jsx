@@ -1,16 +1,11 @@
 import { useEffect, useState } from 'react';
-
 import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
-import Modal from '../modal/modal';
-import IngredientDetails from '../ingredient-details/ingredient-details';
-import OrderDetails from '../order-details/order-details';
 import getIngredients from '../../utils/burger-api'
 
 function App() {
   const [state, setState] = useState({ data: [], isLoading: true, hasError: false });
-  const [modalState, setModalState] = useState({ isOpen: false, typeModal: null, data: {} });
 
   useEffect(() => {
     getIngredients().then((data) => {
@@ -23,14 +18,6 @@ function App() {
 
   }, []);
 
-  function openModal(type, data) {
-    setModalState({ ...modalState, isOpen: true, typeModal: type, data: data })
-  }
-
-  function closeModal() {
-    setModalState({ ...modalState, isOpen: false })
-  }
-
   const { data, isLoading, hasError } = state;
 
   return (
@@ -42,23 +29,13 @@ function App() {
         {
           !isLoading && !hasError && (
             <>
-              <BurgerIngredients data={data} openModal={openModal} />
-              <BurgerConstructor data={data} openModal={openModal} />
+              <BurgerIngredients data={data} />
+              <BurgerConstructor data={data} />
             </>
           )
 
         }
       </main>
-      {modalState.isOpen &&
-        <Modal title={modalState.typeModal === 'ingredient' ? 'Детали ингредиента' : ''} show={modalState.isOpen} close={closeModal}>
-          {modalState.typeModal === 'ingredient' && (
-            <IngredientDetails data={modalState.data} />
-          )}
-          {modalState.typeModal === 'order' &&
-            <OrderDetails id={modalState.data.id} />
-          }
-        </Modal>
-      }
     </div>
   );
 }

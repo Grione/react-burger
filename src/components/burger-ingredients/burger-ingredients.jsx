@@ -8,7 +8,7 @@ import ingredientsStyles from './burger-ingredients.module.css';
 function BurgerIngredients(props) {
   const [current, setCurrent] = React.useState('buns')
 
-  const { data, openModal } = props;
+  const { data } = props;
   const buns = data.filter((el) => el.type === 'bun');
   const mains = data.filter((el) => el.type === 'main');
   const sauces = data.filter((el) => el.type === 'sauce');
@@ -37,9 +37,9 @@ function BurgerIngredients(props) {
         </li>
       </ul>
       <div className={ingredientsStyles['list-wrapper']}>
-        <BurgerIngredientsList ingredients={buns} title="Булки" openModal={openModal} />
-        <BurgerIngredientsList ingredients={sauces} title="Соусы" openModal={openModal} />
-        <BurgerIngredientsList ingredients={mains} title="Начинки" openModal={openModal} />
+        <BurgerIngredientsList ingredients={buns} title="Булки" />
+        <BurgerIngredientsList ingredients={sauces} title="Соусы" />
+        <BurgerIngredientsList ingredients={mains} title="Начинки" />
       </div>
 
     </div>
@@ -48,7 +48,6 @@ function BurgerIngredients(props) {
 
 BurgerIngredients.propTypes = {
   data: PropTypes.arrayOf(ingredientPropTypes.isRequired).isRequired,
-  openModal: PropTypes.func.isRequired,
 }
 
 export default BurgerIngredients; 
