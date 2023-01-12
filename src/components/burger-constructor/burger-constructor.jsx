@@ -3,13 +3,14 @@ import { ingredientPropTypes } from '../../utils/propTypes';
 import ConstructorStyles from './burger-constructor.module.css';
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { orderData } from '../../utils/order-data';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 function BurgerConstructor(props) {
   const [openedModal, setOpenedModal] = useState(false);
-  const bun = props.data.find((el) => el.type === 'bun');
-  const ingredients = props.data.filter((el) => el.type !== 'bun');
+
+  const bun = useMemo(() => props.data.find((el) => el.type === 'bun'), [props.data]);
+  const ingredients = useMemo(() => props.data.filter((el) => el.type !== 'bun'), [props.data]);
 
   return (
     <>
