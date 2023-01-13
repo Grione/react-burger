@@ -5,20 +5,24 @@ import BurgerConstructor from '../burger-constructor/burger-constructor';
 import getIngredients from '../../utils/burger-api'
 
 function App() {
-  const [state, setState] = useState({ data: [], isLoading: true, hasError: false });
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
+  const [ingredients, setIngredients] = useState([]);
 
   useEffect(() => {
-    getIngredients().then((data) => {
-      if (data) {
-        setState({ ...state, data: data.data, isLoading: false })
-      } else {
-        setState({ ...state, hasError: true, isLoading: false })
-      }
-    });
+    getIngredients()
+      .then((data) => {
+        setIngredients(data.data);
+      })
+      .catch((error) => {
+        setHasError(true);
+        console.log(error);
+      })
+      .finally(() => {
+        setIsLoading(false)
+      });
 
   }, []);
-
-  const { data, isLoading, hasError } = state;
 
   return (
     <div className='wrapper'>
@@ -29,8 +33,8 @@ function App() {
         {
           !isLoading && !hasError && (
             <>
-              <BurgerIngredients data={data} />
-              <BurgerConstructor data={data} />
+              <BurgerIngredients data={ingredients} />
+              <BurgerConstructor data={ingredients} />
             </>
           )
 
