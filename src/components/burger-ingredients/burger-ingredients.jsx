@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { ingredientPropTypes } from '../../utils/propTypes';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -9,9 +9,11 @@ function BurgerIngredients(props) {
   const [current, setCurrent] = React.useState('buns')
 
   const { data } = props;
-  const buns = data.filter((el) => el.type === 'bun');
-  const mains = data.filter((el) => el.type === 'main');
-  const sauces = data.filter((el) => el.type === 'sauce');
+
+  const buns = useMemo(()=>data.filter((el) => el.type === 'bun'), [data]);
+  const mains = useMemo(()=>data.filter((el) => el.type === 'main'), [data]);
+  const sauces = useMemo(()=>data.filter((el) => el.type === 'sauce'), [data]);
+
 
   return (
     <div className={ingredientsStyles.ingredients}>

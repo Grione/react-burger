@@ -3,13 +3,16 @@ import { ingredientPropTypes } from '../../utils/propTypes';
 import BurgerIngredientsCard from "../burger-ingredients-card/burger-ingredients-card";
 import BurgerListStyles from './burger-list.module.css';
 
+
 function BurgerIngredientsList(props) {
+  const { title, ingredients } = props;
+
   return (
     <div className='pb-10'>
-      <h2 className='text text_type_main-medium'>{props.title}</h2>
+      <h2 className='text text_type_main-medium'>{title}</h2>
       <ul className={`${BurgerListStyles.list} pt-6 pl-4 pr-4`}>
         {
-          props.ingredients.map((el) => {
+          ingredients.map((el) => {
             return (
               <BurgerIngredientsCard card={el} key={el._id} />
             )
@@ -22,6 +25,7 @@ function BurgerIngredientsList(props) {
 }
 
 BurgerIngredientsList.propTypes = {
+  title: PropTypes.string.isRequired,
   ingredients: PropTypes.arrayOf(ingredientPropTypes.isRequired).isRequired,
 }
 
