@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
-import getIngredients from '../../utils/burger-api'
+import getIngredients from '../../utils/burger-api';
+import { IngredientsContext } from '../../services/ingredientsContext';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -32,10 +33,10 @@ function App() {
         {hasError && 'Erron defined'}
         {
           !isLoading && !hasError && (
-            <>
+            <IngredientsContext.Provider value={ingredients}>
               <BurgerIngredients data={ingredients} />
-              <BurgerConstructor data={ingredients} />
-            </>
+              <BurgerConstructor />
+            </IngredientsContext.Provider>
           )
 
         }
