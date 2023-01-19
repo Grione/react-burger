@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
-import getIngredients from '../../utils/burger-api';
+import { getIngredients } from '../../utils/burger-api';
 import { IngredientsContext } from '../../services/ingredientsContext';
 
 function App() {
