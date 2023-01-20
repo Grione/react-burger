@@ -16,11 +16,7 @@ function BurgerConstructor() {
 
   const totalPrice = useMemo(() => ingredients.reduce((acc, current) => { return acc + current.price }, 0) + bun.price * 2, [bun, ingredients])
 
-  const ingredientsIds = useMemo(() => {
-    const a = ingredients.map((el) => el._id);
-    a.push(bun._id);
-    return a;
-  }, [ingredients, bun]);
+  const ingredientsIds = useMemo(() => [...ingredients.map((el) => el._id), bun._id], [ingredients, bun]);
 
   function sendOrder(ids) {
     postOrder(ids).then((data) => {
