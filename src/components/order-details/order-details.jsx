@@ -1,9 +1,9 @@
-import PropTypes from 'prop-types';
 import orderDetailsStyles from './order-details.module.css';
 import doneIcon from '../../images/done.svg';
+import { useSelector } from 'react-redux';
 
-function OrderDetails(props) {
-  const id = props.id;
+function OrderDetails() {
+  const id = useSelector(state=> state.order.order)
   
   return (
     <div className={orderDetailsStyles.wrapper}>
@@ -18,10 +18,6 @@ function OrderDetails(props) {
       </div>
     </div>
   )
-}
-
-OrderDetails.propTypes = {
-  id: PropTypes.number.isRequired,
 }
 
 export default OrderDetails; 

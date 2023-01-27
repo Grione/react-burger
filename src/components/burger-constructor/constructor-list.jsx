@@ -25,7 +25,7 @@ function ConstructorList() {
           ) : <BlankIngredient type='top' />
           }
         </div>
-        {ingredients.lenth ? (
+        {ingredients.length ? (
           <ul className={ConstructorListStyles['constructor-list']}>
             {
               ingredients.map((el) => {

@@ -1,6 +1,7 @@
-import { GET_ORDER } from "../action-types";
+import { GET_ORDER, CLOSE_MODAL } from "../action-types";
 
 const initialState = {
+  isModal: false,
   order: ''
 }
 
@@ -9,8 +10,15 @@ const orderReducer = (state = initialState, action) => {
     case GET_ORDER:
       return {
         ...state,
-        order: action.payload
+        order: action.payload,
+        isModal: true
       };
+    case CLOSE_MODAL: {
+      return {
+        ...state,
+        isModal: false
+      }
+    }
 
     default:
       return state
