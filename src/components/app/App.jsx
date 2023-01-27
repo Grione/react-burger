@@ -1,29 +1,26 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { GET_INGREDIENTS_START, GET_INGREDIENTS_SUCCESS, GET_INGREDIENTS_FAILURE } from '../../services/action-types';
 import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import { getIngredients } from '../../utils/burger-api';
-import { IngredientsContext } from '../../services/ingredientsContext';
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [hasError, setHasError] = useState(false);
-  const [ingredients, setIngredients] = useState([]);
+
+  const { isLoading, hasError, ingredients } = useSelector(state => state.ingredients);
+  const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch({ type: GET_INGREDIENTS_START });
     getIngredients()
       .then((data) => {
-        setIngredients(data.data);
+        dispatch({ type: GET_INGREDIENTS_SUCCESS, payload: data.data })
       })
       .catch((error) => {
-        setHasError(true);
-        console.log(error);
+        dispatch({ type: GET_INGREDIENTS_FAILURE })
       })
-      .finally(() => {
-        setIsLoading(false)
-      });
-
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className='wrapper'>
@@ -33,10 +30,12 @@ function App() {
         {hasError && 'Erron defined'}
         {
           !isLoading && !hasError && (
-            <IngredientsContext.Provider value={ingredients}>
+            <>
               <BurgerIngredients data={ingredients} />
               <BurgerConstructor />
-            </IngredientsContext.Provider>
+            </>
+
+
           )
 
         }
