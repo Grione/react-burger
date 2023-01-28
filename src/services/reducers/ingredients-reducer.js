@@ -6,7 +6,8 @@ import {
   GET_INGREDIENTS_FAILURE,
   ADD_INGREDIENT,
   REMOVE_INGREDIENT,
-  ADD_BUN
+  ADD_BUN,
+  REORDER_INGREDIENTS
 } from '../action-types';
 
 const initialState = {
@@ -49,7 +50,16 @@ const ingredientsReducer = (state = initialState, action) => {
     case REMOVE_INGREDIENT:
       return {
         ...state,
-        constructorIngredients: state.constructorIngredients.filter((el) => el.key !== action.payload)
+        constructorIngredients: state.constructorIngredients
+          .filter((el) => el.key !== action.payload)
+      }
+    case REORDER_INGREDIENTS:
+      let item = state.constructorIngredients.splice(action.payload.from, 1)[0];
+      let newState = [...state.constructorIngredients];
+      newState.splice(action.payload.to, 0, item)
+      return {
+        ...state,
+        constructorIngredients: newState
       }
     case ADD_BUN:
       return {
