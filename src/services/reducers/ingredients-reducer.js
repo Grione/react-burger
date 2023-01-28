@@ -51,7 +51,7 @@ const ingredientsReducer = (state = initialState, action) => {
     case ADD_BUN:
       return {
         ...state,
-        constructorBun: state.ingredients.filter((item) => item._id === action.payload)
+        constructorBun: [state.ingredients.find((item) => item._id === action.payload)]
       }
     default:
       return state

@@ -23,8 +23,6 @@ function BurgerIngredientsCard(props) {
   const id = card._id;
   const type = card.type;
 
-  //const [count, setCount] = useState(constructorIngredients);
-
   const [, dragRef] = useDrag({
     type: 'ingredient',
     item: { id, type },

@@ -6,7 +6,7 @@ import { useDrop } from 'react-dnd/dist/hooks';
 import { ADD_INGREDIENT, REMOVE_INGREDIENT, ADD_BUN } from '../../services/action-types';
 
 function ConstructorList() {
-  const bun = useSelector(state => state.ingredients.constructorBun)
+  const bun = useSelector(state => state.ingredients.constructorBun[0])
   const ingredients = useSelector(state => state.ingredients.constructorIngredients)
 
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ function ConstructorList() {
       <div ref={dropTarget} className={`${ConstructorListStyles['constructor-main']}`}>
 
         <div className={`mb-4 ${ConstructorListStyles['element-top']}`}>
-          {bun._id ? (
+          {bun ? (
             <ConstructorElement
               type="top"
               isLocked={true}
@@ -60,7 +60,7 @@ function ConstructorList() {
         ) : <BlankIngredient />}
 
         <div className={`mt-4 ${ConstructorListStyles['element-bottom']}`}>
-          {bun._id ? (
+          {bun ? (
             <ConstructorElement
               type="bottom"
               isLocked={true}
