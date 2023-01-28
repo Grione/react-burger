@@ -1,17 +1,29 @@
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import BlankIngredient from './blank-ingredient';
 import ConstructorListStyles from './constructor-list.module.css';
+import { useDrop } from 'react-dnd/dist/hooks';
+import { ADD_INGREDIENT } from '../../services/action-types';
 
 function ConstructorList() {
-  const data = useSelector(state => state.constructorIngredients.constructorIngredients);
+  const data = useSelector(state => state.ingredients.constructorIngredients);
   const bun = useMemo(() => data.find((el) => el.type === 'bun'), [data]);
   const ingredients = useMemo(() => data.filter((el) => el.type !== 'bun'), [data]);
 
+  const dispatch = useDispatch();
+
+  const [, dropTarget] = useDrop({
+    accept: 'ingredient',
+    drop(itemId) {
+      console.log(itemId)
+      dispatch({type: ADD_INGREDIENT, payload: itemId.id});
+    },
+});
+
   return (
     <>
-      <div className={`${ConstructorListStyles['constructor-main']}`}>
+      <div ref={dropTarget} className={`${ConstructorListStyles['constructor-main']}`}>
 
         <div className={`mb-4 ${ConstructorListStyles['element-top']}`}>
           {bun ? (
