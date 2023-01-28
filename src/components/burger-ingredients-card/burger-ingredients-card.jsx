@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { OPEN_INGREDIENT, CLOSE_INGREDIENT } from '../../services/action-types';
 import { ingredientPropTypes } from '../../utils/propTypes';
@@ -16,7 +15,7 @@ function BurgerIngredientsCard(props) {
 
   const constructorIngredientCount = useSelector(state => state.ingredients.constructorIngredients.filter((item) => item._id === card._id).length);
   const bunCount = useSelector(state => state.ingredients.constructorBun.filter((item) => item._id === card._id).length);
-  const count = card.type === 'bun'? bunCount :constructorIngredientCount;
+  const count = card.type === 'bun' ? bunCount : constructorIngredientCount;
 
   const dispatch = useDispatch();
 

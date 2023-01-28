@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 import {
   GET_INGREDIENTS_START,
   GET_INGREDIENTS_SUCCESS,
@@ -39,14 +41,15 @@ const ingredientsReducer = (state = initialState, action) => {
     case ADD_INGREDIENT:
       return {
         ...state,
-        constructorIngredients: [
-          ...state.constructorIngredients,
-          state.ingredients.find((item) => item._id === action.payload)]
+        constructorIngredients: [...state.constructorIngredients,
+        { ...state.ingredients.find((item) => item._id === action.payload), key: uuidv4() }
+        ],
+
       };
     case REMOVE_INGREDIENT:
       return {
         ...state,
-        constructorIngredients: state.constructorIngredients.filter((el) => el._id !== action.payload)
+        constructorIngredients: state.constructorIngredients.filter((el) => el.key !== action.payload)
       }
     case ADD_BUN:
       return {

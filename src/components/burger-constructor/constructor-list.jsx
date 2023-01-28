@@ -19,7 +19,6 @@ function ConstructorList() {
       } else {
         dispatch({ type: ADD_INGREDIENT, payload: item.id });
       }
-
     },
   });
 
@@ -44,13 +43,13 @@ function ConstructorList() {
             {
               ingredients.map((el) => {
                 return (
-                  <li key={el._id} className={ConstructorListStyles['constructor-element-wrapper']}>
+                  <li key={el.key} className={ConstructorListStyles['constructor-element-wrapper']}>
                     <DragIcon type="primary" />
                     <ConstructorElement
                       text={el.name}
                       price={el.price}
                       thumbnail={el.image}
-                      handleClose={()=> dispatch({ type: REMOVE_INGREDIENT, payload: el._id })}
+                      handleClose={() => dispatch({ type: REMOVE_INGREDIENT, payload: el.key })}
                     />
                   </li>
                 )
