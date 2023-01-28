@@ -16,10 +16,9 @@ function ConstructorList() {
   const [, dropTarget] = useDrop({
     accept: 'ingredient',
     drop(itemId) {
-      console.log(itemId)
-      dispatch({type: ADD_INGREDIENT, payload: itemId.id});
+      dispatch({ type: ADD_INGREDIENT, payload: itemId.id });
     },
-});
+  });
 
   return (
     <>

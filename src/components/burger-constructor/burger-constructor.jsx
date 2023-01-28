@@ -13,11 +13,8 @@ function BurgerConstructor() {
   const isModal = useSelector(state => state.order.isModal);
 
   const ingredientsData = useSelector(state => state.ingredients.constructorIngredients);
-  console.log(ingredientsData)
   const bun = useMemo(() => ingredientsData.find((el) => el.type === 'bun'), [ingredientsData]);
   const ingredients = useMemo(() => ingredientsData.filter((el) => el.type !== 'bun'), [ingredientsData]);
-
-  
 
   const totalPrice = useMemo(() => {
     if (ingredients.length) {
