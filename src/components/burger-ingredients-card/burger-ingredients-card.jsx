@@ -18,10 +18,11 @@ function BurgerIngredientsCard(props) {
   const dispatch = useDispatch();
 
   const id = card._id;
+  const type = card.type;
 
   const [, dragRef] = useDrag({
     type: 'ingredient',
-    item: { id },
+    item: { id, type },
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult();
       if (item && dropResult) {

@@ -3,14 +3,16 @@ import {
   GET_INGREDIENTS_SUCCESS,
   GET_INGREDIENTS_FAILURE,
   ADD_INGREDIENT,
-  REMOVE_INGREDIENT
+  REMOVE_INGREDIENT,
+  ADD_BUN
 } from '../action-types';
 
 const initialState = {
   isLoading: true,
   hasError: false,
   ingredients: [],
-  constructorIngredients: []
+  constructorIngredients: [],
+  constructorBun: {}
 }
 
 const ingredientsReducer = (state = initialState, action) => {
@@ -45,6 +47,11 @@ const ingredientsReducer = (state = initialState, action) => {
       return {
         ...state,
         constructorIngredients: state.constructorIngredients.filter((el) => el._id !== action.payload)
+      }
+    case ADD_BUN:
+      return {
+        ...state,
+        constructorBun: state.ingredients.find((item) => item._id === action.payload)
       }
     default:
       return state

@@ -4,19 +4,27 @@ import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burg
 import BlankIngredient from './blank-ingredient';
 import ConstructorListStyles from './constructor-list.module.css';
 import { useDrop } from 'react-dnd/dist/hooks';
-import { ADD_INGREDIENT } from '../../services/action-types';
+import { ADD_INGREDIENT, ADD_BUN } from '../../services/action-types';
 
 function ConstructorList() {
   const data = useSelector(state => state.ingredients.constructorIngredients);
-  const bun = useMemo(() => data.find((el) => el.type === 'bun'), [data]);
+  const bun = useSelector(state => state.ingredients.constructorBun)
   const ingredients = useMemo(() => data.filter((el) => el.type !== 'bun'), [data]);
+
+  console.log(bun)
 
   const dispatch = useDispatch();
 
   const [, dropTarget] = useDrop({
     accept: 'ingredient',
-    drop(itemId) {
-      dispatch({ type: ADD_INGREDIENT, payload: itemId.id });
+    drop(item) {
+      console.log(item);
+      if (item.type === 'bun') {
+        dispatch({ type: ADD_BUN, payload: item.id });
+      } else {
+        dispatch({ type: ADD_INGREDIENT, payload: item.id });
+      }
+
     },
   });
 
@@ -25,7 +33,7 @@ function ConstructorList() {
       <div ref={dropTarget} className={`${ConstructorListStyles['constructor-main']}`}>
 
         <div className={`mb-4 ${ConstructorListStyles['element-top']}`}>
-          {bun ? (
+          {bun._id ? (
             <ConstructorElement
               type="top"
               isLocked={true}
@@ -56,7 +64,7 @@ function ConstructorList() {
         ) : <BlankIngredient />}
 
         <div className={`mt-4 ${ConstructorListStyles['element-bottom']}`}>
-          {bun ? (
+          {bun._id ? (
             <ConstructorElement
               type="bottom"
               isLocked={true}
