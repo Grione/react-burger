@@ -3,7 +3,7 @@ import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burg
 import BlankIngredient from './blank-ingredient';
 import ConstructorListStyles from './constructor-list.module.css';
 import { useDrop } from 'react-dnd/dist/hooks';
-import { ADD_INGREDIENT, ADD_BUN } from '../../services/action-types';
+import { ADD_INGREDIENT, REMOVE_INGREDIENT, ADD_BUN } from '../../services/action-types';
 
 function ConstructorList() {
   const bun = useSelector(state => state.ingredients.constructorBun)
@@ -50,6 +50,7 @@ function ConstructorList() {
                       text={el.name}
                       price={el.price}
                       thumbnail={el.image}
+                      handleClose={()=> dispatch({ type: REMOVE_INGREDIENT, payload: el._id })}
                     />
                   </li>
                 )

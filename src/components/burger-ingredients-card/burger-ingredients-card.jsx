@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { OPEN_INGREDIENT, CLOSE_INGREDIENT } from '../../services/action-types';
 import { ingredientPropTypes } from '../../utils/propTypes';
@@ -11,25 +11,23 @@ import { useDrag } from "react-dnd";
 function BurgerIngredientsCard(props) {
   const { card } = props;
 
-  const [count, setCount] = useState(0);
-
   const isModal = useSelector(state => state.currentIngredient.isModal);
   const currentIngredient = useSelector(state => state.currentIngredient.currentIngredient);
+
+  const constructorIngredientCount = useSelector(state => state.ingredients.constructorIngredients.filter((item) => item._id === card._id).length);
+  const bunCount = useSelector(state => state.ingredients.constructorBun.filter((item) => item._id === card._id).length);
+  const count = card.type === 'bun'? bunCount :constructorIngredientCount;
+
   const dispatch = useDispatch();
 
   const id = card._id;
   const type = card.type;
 
+  //const [count, setCount] = useState(constructorIngredients);
+
   const [, dragRef] = useDrag({
     type: 'ingredient',
     item: { id, type },
-    end: (item, monitor) => {
-      const dropResult = monitor.getDropResult();
-      if (item && dropResult) {
-        setCount(count + 1)
-      }
-
-    }
   });
 
   function openModal() {
