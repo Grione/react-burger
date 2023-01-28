@@ -12,14 +12,13 @@ function BurgerConstructor() {
   const dispatch = useDispatch();
   const isModal = useSelector(state => state.order.isModal);
 
-  const ingredientsData = useSelector(state => state.ingredients.constructorIngredients);
-  const bun = useMemo(() => ingredientsData.find((el) => el.type === 'bun'), [ingredientsData]);
-  const ingredients = useMemo(() => ingredientsData.filter((el) => el.type !== 'bun'), [ingredientsData]);
+  const ingredients = useSelector(state => state.ingredients.constructorIngredients);
+  const bun = useSelector(state => state.ingredients.constructorBun);
 
   const totalPrice = useMemo(() => {
-    if (ingredients.length) {
+    if (ingredients.length || bun.price) {
       return ingredients.reduce(
-        (acc, current) => { return acc + current.price }, 0) + (bun ? bun.price * 2 : 0)
+        (acc, current) => { return acc + current.price }, 0) + (bun.price ? bun.price * 2 : 0)
     }
   }, [ingredients, bun]);
 

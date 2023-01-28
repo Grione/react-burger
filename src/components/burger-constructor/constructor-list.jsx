@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import BlankIngredient from './blank-ingredient';
@@ -7,18 +6,14 @@ import { useDrop } from 'react-dnd/dist/hooks';
 import { ADD_INGREDIENT, ADD_BUN } from '../../services/action-types';
 
 function ConstructorList() {
-  const data = useSelector(state => state.ingredients.constructorIngredients);
   const bun = useSelector(state => state.ingredients.constructorBun)
-  const ingredients = useMemo(() => data.filter((el) => el.type !== 'bun'), [data]);
-
-  console.log(bun)
+  const ingredients = useSelector(state => state.ingredients.constructorIngredients)
 
   const dispatch = useDispatch();
 
   const [, dropTarget] = useDrop({
     accept: 'ingredient',
     drop(item) {
-      console.log(item);
       if (item.type === 'bun') {
         dispatch({ type: ADD_BUN, payload: item.id });
       } else {
