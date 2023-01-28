@@ -32,11 +32,3 @@
 .constructor-list::-webkit-scrollbar-thumb {
   background-color: #8585AD;
 }
-
-.constructor-element-wrapper {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 8px;
-}

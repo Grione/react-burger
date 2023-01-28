@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import ConstructorCard from './constructor-card';
+import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import BlankIngredient from './blank-ingredient';
 import ConstructorListStyles from './constructor-list.module.css';
 import { useDrop } from 'react-dnd/dist/hooks';
-import { ADD_INGREDIENT, REMOVE_INGREDIENT, ADD_BUN } from '../../services/action-types';
+import { ADD_INGREDIENT, ADD_BUN } from '../../services/action-types';
 
 function ConstructorList() {
   const bun = useSelector(state => state.ingredients.constructorBun[0])
@@ -41,17 +42,9 @@ function ConstructorList() {
         {ingredients.length ? (
           <ul className={ConstructorListStyles['constructor-list']}>
             {
-              ingredients.map((el) => {
+              ingredients.map((item, index) => {
                 return (
-                  <li key={el.key} className={ConstructorListStyles['constructor-element-wrapper']}>
-                    <DragIcon type="primary" />
-                    <ConstructorElement
-                      text={el.name}
-                      price={el.price}
-                      thumbnail={el.image}
-                      handleClose={() => dispatch({ type: REMOVE_INGREDIENT, payload: el.key })}
-                    />
-                  </li>
+                  <ConstructorCard index={index} item={item} key={item.key}/>
                 )
               })
             }
