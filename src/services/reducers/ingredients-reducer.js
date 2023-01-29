@@ -1,9 +1,9 @@
 import { v4 as uuidv4 } from 'uuid';
 
 import {
-  GET_INGREDIENTS_START,
+  GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS,
-  GET_INGREDIENTS_FAILURE,
+  GET_INGREDIENTS_ERROR,
   ADD_INGREDIENT,
   REMOVE_INGREDIENT,
   ADD_BUN,
@@ -20,7 +20,7 @@ const initialState = {
 
 const ingredientsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_INGREDIENTS_START:
+    case GET_INGREDIENTS_REQUEST:
       return {
         ...state,
         isLoading: true,
@@ -33,9 +33,10 @@ const ingredientsReducer = (state = initialState, action) => {
         hasError: false,
         ingredients: action.payload
       }
-    case GET_INGREDIENTS_FAILURE:
+    case GET_INGREDIENTS_ERROR:
       return {
         ...state,
+        ingredients: initialState.ingredients,
         isLoading: false,
         hasError: true
       }

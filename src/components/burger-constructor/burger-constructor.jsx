@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { GET_ORDER, CLOSE_MODAL } from '../../services/action-types';
+import { GET_ORDER_REQUEST, GET_ORDER_SUCCESS, GET_ORDER_ERROR, CLOSE_ORDER_MODAL } from '../../services/action-types';
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import ConstructorList from './constructor-list';
 import Modal from '../modal/modal';
@@ -26,10 +26,12 @@ function BurgerConstructor() {
   function sendOrder(ingredients) {
     if (!ingredients.length) return;
     const ids = [...ingredients.map((el) => el._id), bun._id];
+    dispatch({ type: GET_ORDER_REQUEST })
     postOrder(ids).then((data) => {
-      dispatch({ type: GET_ORDER, payload: data.order.number })
+      dispatch({ type: GET_ORDER_SUCCESS, payload: data.order.number })
     })
       .catch((error) => {
+        dispatch({ type: GET_ORDER_ERROR })
         console.log(error);
       })
   }
@@ -53,7 +55,7 @@ function BurgerConstructor() {
 
       </div>
       {isModal &&
-        <Modal close={() => dispatch({ type: CLOSE_MODAL })}>
+        <Modal close={() => dispatch({ type: CLOSE_ORDER_MODAL })}>
           <OrderDetails />
         </Modal>}
     </>
