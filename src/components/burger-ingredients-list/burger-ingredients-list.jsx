@@ -1,14 +1,15 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import { ingredientPropTypes } from '../../utils/propTypes';
 import BurgerIngredientsCard from "../burger-ingredients-card/burger-ingredients-card";
 import BurgerListStyles from './burger-list.module.css';
 
 
-function BurgerIngredientsList(props) {
+const BurgerIngredientsList = React.forwardRef((props, ref)=> {
   const { title, ingredients } = props;
 
   return (
-    <div className='pb-10'>
+    <div ref={ref} className='pb-10'>
       <h2 className='text text_type_main-medium'>{title}</h2>
       <ul className={`${BurgerListStyles.list} pt-6 pl-4 pr-4`}>
         {
@@ -22,7 +23,7 @@ function BurgerIngredientsList(props) {
       </ul>
     </div>
   )
-}
+})
 
 BurgerIngredientsList.propTypes = {
   title: PropTypes.string.isRequired,
