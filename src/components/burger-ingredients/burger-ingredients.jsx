@@ -1,19 +1,40 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { ingredientPropTypes } from '../../utils/propTypes';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerIngredientsList from '../burger-ingredients-list/burger-ingredients-list';
 import ingredientsStyles from './burger-ingredients.module.css';
+import { useInView } from 'react-intersection-observer';
+import { InView } from 'react-intersection-observer';
 
 function BurgerIngredients(props) {
   const [current, setCurrent] = React.useState('buns')
 
   const { data } = props;
 
-  const buns = useMemo(()=>data.filter((el) => el.type === 'bun'), [data]);
-  const mains = useMemo(()=>data.filter((el) => el.type === 'main'), [data]);
-  const sauces = useMemo(()=>data.filter((el) => el.type === 'sauce'), [data]);
+  const buns = useMemo(() => data.filter((el) => el.type === 'bun'), [data]);
+  const mains = useMemo(() => data.filter((el) => el.type === 'main'), [data]);
+  const sauces = useMemo(() => data.filter((el) => el.type === 'sauce'), [data]);
 
+  /*   const parentRef = React.createRef();
+    const ref = React.createRef();
+    function scrollHandler() {
+      const parentRectY = parentRef.current.getBoundingClientRect().y;
+  
+      const mainsY = ref.current.getBoundingClientRect().y;
+      console.log(parentRectY);
+      console.log('main:', mainsY)
+    } */
+
+  const [ref, inView, entry] = useInView({
+    threshold: 0.7
+  });
+  const [ref2, inView2, entry2] = useInView({
+    threshold: 1
+  });
+  const [ref3, inView3, entry3] = useInView({
+    threshold: 0.1
+  });
 
   return (
     <div className={ingredientsStyles.ingredients}>
@@ -22,26 +43,28 @@ function BurgerIngredients(props) {
         <li>
           <Tab
             value="buns"
-            active={current === 'buns'}
+            active={inView}
             onClick={setCurrent}>Булки</Tab>
         </li>
         <li>
           <Tab
             value="sauces"
-            active={current === 'sauces'}
+            active={inView2}
             onClick={setCurrent}>Соусы</Tab>
         </li>
         <li>
           <Tab
             value="mains"
-            active={current === 'mains'}
+            active={inView3}
             onClick={setCurrent}>Начинки</Tab>
         </li>
       </ul>
       <div className={ingredientsStyles['list-wrapper']}>
-        <BurgerIngredientsList ingredients={buns} title="Булки" />
-        <BurgerIngredientsList ingredients={sauces} title="Соусы" />
-        <BurgerIngredientsList ingredients={mains} title="Начинки" />
+        <InView inView={inView} inView2={inView2} inView3={inView3}>
+          <BurgerIngredientsList ref={ref} ingredients={buns} title="Булки" />
+          <BurgerIngredientsList ref={ref2} ingredients={sauces} title="Соусы" />
+          <BurgerIngredientsList ref={ref3} ingredients={mains} title="Начинки" />
+        </InView>
       </div>
 
     </div>
