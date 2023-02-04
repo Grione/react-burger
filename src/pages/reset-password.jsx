@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styles from './login.module.css';
 import { Button, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components'
+import { Link } from 'react-router-dom';
 
 export function ResetPassword() {
   const [password, setPassword] = useState('');
@@ -42,7 +43,9 @@ export function ResetPassword() {
           <div className="actions">
             <div style={{ textAlign: 'center' }}>
               <span className='text_color_inactive text text_type_main-default mr-1'>Вспомнили пароль?</span>
-              <a href="#" className='text text_type_main-default text_color_accent'>Войти</a>
+              <Link
+                to="/login"
+                className='text text_type_main-default text_color_accent'>Войти</Link>
             </div>
           </div>
         </div>

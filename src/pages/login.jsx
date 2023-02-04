@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styles from './login.module.css';
 import { Button, EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
+import { Link } from 'react-router-dom';
 
 export function LoginPage() {
   const [email, setEmail] = useState('')
@@ -36,12 +37,23 @@ export function LoginPage() {
           </div>
           <div className="actions">
             <div className="mb-4" style={{ textAlign: 'center' }}>
-              <span className='text_color_inactive text text_type_main-default mr-1'>Вы — новый пользователь?</span>
-              <a href="#" className='text text_type_main-default text_color_accent'>Зарегистрироваться</a>
+              <span
+                className='text_color_inactive
+               text text_type_main-default 
+               mr-1'>Вы — новый пользователь?</span>
+              <Link
+                to="/register"
+                className='text text_type_main-default text_color_accent'>
+                Зарегистрироваться
+              </Link>
             </div>
             <div style={{ textAlign: 'center' }}>
               <span className='text_color_inactive text text_type_main-default mr-1'>Забыли пароль?</span>
-              <a href="#" className='text text_type_main-default text_color_accent'>Восстановить пароль</a>
+              <Link
+                to="/forgot-password"
+                className='text text_type_main-default text_color_accent'>
+                Восстановить пароль
+              </Link>
             </div>
           </div>
         </div>
