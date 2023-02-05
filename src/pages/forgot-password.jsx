@@ -1,13 +1,27 @@
 import { useState } from 'react';
 import styles from './login.module.css';
 import { Button, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { recoveryPassword } from '../utils/burger-api';
 
 export function ForgotPassword() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
+  const [error, setError] = useState(false);
 
   const onChangeEmail = e => {
     setEmail(e.target.value)
+  }
+
+  const onSubmitHandler = async () => {
+    await recoveryPassword(email).then((resp) => {
+      if (resp.success) {
+        navigate("/reset-password");
+        setError(false)
+      }
+    }, () => {
+      setError(true)
+    });
   }
 
   return (
@@ -24,9 +38,12 @@ export function ForgotPassword() {
               />
             </div>
             <div className='mb-20' style={{ textAlign: "center" }}>
-              <Button htmlType="submit">Восстановить</Button>
+              <Button htmlType="button" onClick={onSubmitHandler}>Восстановить</Button>
             </div>
           </div>
+          {error ? (
+            <p className='text text_type_main-default'>Произошла ошибка</p>
+          ) : ''}
           <div className="actions">
             <div style={{ textAlign: 'center' }}>
               <span className='text_color_inactive text text_type_main-default mr-1'>Вспомнили пароль?</span>
