@@ -1,7 +1,7 @@
 const URL = 'https://norma.nomoreparties.space/api';
 
 const checkRes = (res) => {
-  return res.ok ? res.json() : res.json().then(err => Promise.reject(err));
+  return res.ok ? res.json() : res.json().catch(err => Promise.reject(err));
 }
 
 
@@ -23,4 +23,19 @@ async function postOrder(ids) {
   return checkRes(res);
 }
 
-export { getIngredients, postOrder }
+async function recoveryPassword(email) {
+  const res = await fetch('https://norma.nomoreparties.space/api/password-reset',
+    {
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ "email": email })
+    }
+  );
+  return checkRes(res);
+}
+
+export { getIngredients, postOrder, recoveryPassword }
