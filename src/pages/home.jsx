@@ -24,7 +24,7 @@ export function HomePage() {
       .catch((error) => {
         dispatch({ type: GET_INGREDIENTS_ERROR })
       })
-  }, [dispatch]);
+  }, [dispatch]);       
   return (
     <>
       {isLoading && 'Loading...'}

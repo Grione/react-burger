@@ -38,4 +38,35 @@ async function recoveryPassword(email) {
   return checkRes(res);
 }
 
-export { getIngredients, postOrder, recoveryPassword }
+async function resetPassword(password, code) {
+  const res = await fetch('https://norma.nomoreparties.space/api/password-reset/reset',
+    {
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ "password": password, "token": code })
+    }
+  );
+  return checkRes(res);
+}
+
+async function loginRequest(form) {
+  return await fetch('https://cosmic.nomoreparties.space/login', {
+    method: 'POST',
+    mode: 'cors',
+    cache: 'no-cache',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer',
+    body: JSON.stringify(form)
+  });
+  
+}
+
+export { getIngredients, postOrder, recoveryPassword, resetPassword, loginRequest }

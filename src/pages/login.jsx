@@ -1,16 +1,28 @@
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import styles from './login.module.css';
 import { Button, EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Link } from 'react-router-dom';
+import { loginUser } from '../services/actions/auth-actions';
 
 export function LoginPage() {
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const { user, isLoading, isError } = useSelector(state => state.user);
+  const dispatch = useDispatch();
+
   const onChangeEmail = e => {
     setEmail(e.target.value)
   }
-  const [password, setPassword] = useState('')
+
   const onChangePassword = e => {
     setPassword(e.target.value)
+  }
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    dispatch(loginUser({ "email": email, "password": password }));
   }
 
   return (
@@ -18,7 +30,7 @@ export function LoginPage() {
       <div className={styles.wrapper}>
         <div className={styles.content}>
           <div className="title text text_type_main-medium mb-6">Вход</div>
-          <div className="form">
+          <form onSubmit={onSubmitHandler} className='mb-20'>
             <div className='mb-6'>
               <EmailInput
                 onChange={onChangeEmail}
@@ -31,10 +43,13 @@ export function LoginPage() {
                 value={password}
               />
             </div>
-            <div className='mb-20' style={{ textAlign: "center" }}>
-              <Button htmlType="submit">Войти</Button>
+            <div style={{ textAlign: "center" }}>
+              <Button htmlType="submit" disabled={isLoading} >Войти</Button>
             </div>
-          </div>
+            {isError && <div style={{ textAlign: "center" }} className="mt-4 mb-4 text text_type_main-default text_color_inactive">Произошла ошибка</div>}
+          </form>
+          
+
           <div className="actions">
             <div className="mb-4" style={{ textAlign: 'center' }}>
               <span
