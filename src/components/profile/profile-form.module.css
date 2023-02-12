@@ -1,0 +1,12 @@
+.bottom {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 28px;
+}
+
+.reject {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
