@@ -1,12 +1,19 @@
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import styles from './login.module.css';
 import { Button, EmailInput, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Link } from 'react-router-dom';
+import { registerUser } from '../services/actions/auth-actions';
 
 export function RegisterPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [name, setName] = useState('')
+  const [name, setName] = useState('');
+
+  const { isLoading, isError } = useSelector(state => state.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onChangeEmail = e => {
     setEmail(e.target.value)
@@ -20,12 +27,24 @@ export function RegisterPage() {
     setName(e.target.value)
   }
 
+  const submitHandler = (e) => {
+    e.preventDefault();
+    dispatch(registerUser(
+      {
+        "email": email,
+        "password": password,
+        "name": name
+      }, ()=> {
+        navigate('/')
+      }))
+  }
+
   return (
     <>
       <div className={styles.wrapper}>
         <div className={styles.content}>
           <div className="title text text_type_main-medium mb-6">Регистрация</div>
-          <div className="form">
+          <form onSubmit={submitHandler}>
             <div className='mb-6'>
               <Input
                 type='text'
@@ -47,9 +66,10 @@ export function RegisterPage() {
               />
             </div>
             <div className='mb-20' style={{ textAlign: "center" }}>
-              <Button htmlType="submit">Зарегистрироваться</Button>
+              <Button htmlType="submit" disabled={isLoading}>Зарегистрироваться</Button>
             </div>
-          </div>
+            {isError && <p className='mt-2 text_color_inactive text text_type_main-default'>Произошла ошибка</p>}
+          </form>
           <div className="actions">
             <div style={{ textAlign: 'center' }}>
               <span className='text_color_inactive text text_type_main-default mr-1'>Уже зарегистрированы?</span>
