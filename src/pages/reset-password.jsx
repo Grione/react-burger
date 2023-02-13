@@ -19,7 +19,14 @@ export function ResetPassword() {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    await resetPassword(password, code);
+    await resetPassword(password, code).then((resp) => {
+      if (resp.success) {
+        //navigate("/reset-password");
+        setError(false)
+      }
+    }, () => {
+      setError(true)
+    });
   }
 
   return (
@@ -27,13 +34,13 @@ export function ResetPassword() {
       <div className={styles.wrapper}>
         <div className={styles.content}>
           <div className="title text text_type_main-medium mb-6">Восстановление пароля</div>
-          <form>
+          <form onSubmit={submitHandler}>
             <div className='mb-6'>
               <PasswordInput
                 onChange={onChangePassword}
                 value={password}
                 placeholder='Введите новый пароль'
-                required
+                required={true}
               />
             </div>
             <div className='mb-6'>
@@ -42,12 +49,13 @@ export function ResetPassword() {
                 onChange={onChangeCode}
                 value={code}
                 placeholder='Введите код из письма'
-                required
+                required={true}
               />
             </div>
             <div className='mb-20' style={{ textAlign: "center" }}>
-              <Button htmlType="submit" onSubmit={submitHandler}>Сохранить</Button>
+              <Button htmlType="submit" >Сохранить</Button>
             </div>
+            {error && <div className="mt-2">Произошла ошибка</div>}
           </form>
           <div className="actions">
             <div style={{ textAlign: 'center' }}>
