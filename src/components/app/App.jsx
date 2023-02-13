@@ -25,7 +25,9 @@ function App() {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password" element={<ResetPassword />} />
-            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/profile" element={<ProfilePage />}>
+              <Route path="orders" element={<p>Orders</p>}/>
+            </Route>
             <Route path="/ingredient" element={<IngredientPage />} />
             <Route path="*" element={<NotFound404 />} />
           </Routes>
