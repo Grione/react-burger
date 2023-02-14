@@ -4,9 +4,15 @@
   gap: 60px;
 }
 
-.link {
+.item {
   display: flex;
   align-items: center;
   min-width: 320px;
   min-height: 64px;
+}
+
+.link {
+  background: initial;
+  border: none;
+  cursor: pointer;
 }

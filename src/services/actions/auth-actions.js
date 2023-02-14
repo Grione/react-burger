@@ -80,7 +80,8 @@ export const getUser = () => (dispatch) => {
       type: GET_USER_SUCCESS,
       payload: data
     })
-  }).catch((error) => {
+  })
+  .catch((error) => {
     if (error.message === 'jwt expired') {
       dispatch(refreshToken(getUser()));
     } else {

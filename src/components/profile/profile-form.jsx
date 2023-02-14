@@ -8,33 +8,30 @@ export default function ProfileForm() {
 
   const { user } = useSelector(state => state.user);
 
-  const [name, setName] = useState();
-  const [password, setPassword] = useState("");
-  const [login, setLogin] = useState();
+  const [formValue, setFormValue] = useState({ name: user.name, email: user.email, password: "", });
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getUser())
-  }, []);
+    setFormValue({ name: user.name, email: user.email, password: "", })
+  }, [user])
+
+  console.log('user name', formValue);
 
   const rejectForm = () => {
-    setName("");
-    setPassword("");
-    setLogin("");
+    setFormValue({ name: user.name, email: user.email, password: "", })
   }
+
+  const handleInputChange = (e) => {
+    setFormValue((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   const submitHandler = (e) => {
     e.preventDefault();
-
-    const form = {
-      "email": login,
-      "name": name,
-    }
-    if (password) {
-      form.password = password;
-    }
-    dispatch(changeUser(form));
+    dispatch(changeUser(formValue));
 
   }
 
@@ -44,32 +41,35 @@ export default function ProfileForm() {
         <ul>
           <li className='mb-6'>
             <Input
-              value={name}
-              onChange={e => setName(e.target.value)}
+              value={formValue.name}
+              onChange={handleInputChange}
               placeholder={'Имя'}
               type={'text'}
               icon={'EditIcon'}
               autoComplete='off'
+              name='name'
             />
           </li>
           <li className='mb-6'>
             <Input
-              value={login}
-              onChange={e => setLogin(e.target.value)}
+              value={formValue.email}
+              onChange={handleInputChange}
               placeholder={'Логин'}
               type={'email'}
               icon={'EditIcon'}
               autoComplete='off'
+              name='email'
             />
           </li>
           <li className='mb-6'>
             <Input
-              value={password}
-              onChange={e => setPassword(e.target.value)}
+              value={formValue.password}
+              onChange={handleInputChange}
               placeholder={'Пароль'}
               type={'password'}
               icon={'EditIcon'}
               autoComplete='off'
+              name='password'
             />
           </li>
         </ul>
