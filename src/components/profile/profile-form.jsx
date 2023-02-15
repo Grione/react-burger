@@ -1,22 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { getUser, changeUser } from '../../services/actions/auth-actions';
+import { changeUser } from '../../services/actions/auth-actions';
 import styles from './profile-form.module.css';
 
 export default function ProfileForm() {
 
   const { user } = useSelector(state => state.user);
 
-  const [formValue, setFormValue] = useState({ name: user.name, email: user.email, password: "", });
+  const [formValue, setFormValue] = useState({ name: "", email: "", password: "", });
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     setFormValue({ name: user.name, email: user.email, password: "", })
   }, [user])
-
-  console.log('user name', formValue);
 
   const rejectForm = () => {
     setFormValue({ name: user.name, email: user.email, password: "", })

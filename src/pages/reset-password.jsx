@@ -1,13 +1,17 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import styles from './login.module.css';
 import { Button, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components'
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useLocation } from 'react-router-dom';
 import { resetPassword } from '../utils/burger-api';
 
 export function ResetPassword() {
+  const { isAuthenticated } = useSelector(state => state.user);
   const [password, setPassword] = useState('');
   const [code, setCode] = useState('');
   const [error, setError] = useState(false);
+
+  const { state } = useLocation();
 
   const onChangePassword = e => {
     setPassword(e.target.value)
@@ -21,12 +25,19 @@ export function ResetPassword() {
     e.preventDefault();
     await resetPassword(password, code).then((resp) => {
       if (resp.success) {
-        //navigate("/reset-password");
         setError(false)
       }
     }, () => {
       setError(true)
     });
+  }
+
+  if (isAuthenticated || !state) {
+    return (
+      <Navigate
+        to={'/'}
+      />
+    );
   }
 
   return (

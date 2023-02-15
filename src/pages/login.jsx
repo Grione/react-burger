@@ -9,7 +9,8 @@ export function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { isAuthenticated, user, isLoading, isError } = useSelector(state => state.user);
+  const { isAuthenticated, isLoading, isError } = useSelector(state => state.user);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

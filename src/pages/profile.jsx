@@ -4,8 +4,7 @@ import { useDispatch } from 'react-redux';
 import styles from './profile.module.css';
 import ProfileForm from '../components/profile/profile-form';
 import { logOut } from '../services/actions/auth-actions';
-import { useEffect } from 'react';
-import { getUser } from '../services/actions/auth-actions';
+import { deleteCookie } from '../utils/cookie';
 
 export function ProfilePage() {
 
@@ -18,12 +17,9 @@ export function ProfilePage() {
   const logoutHandler = () => {
     dispatch(logOut(() => {
       navigate('/login');
+      deleteCookie('accessToken');
     }));
   }
-
-  useEffect(() => {
-    dispatch(getUser())
-  }, [dispatch])
 
   return (
     <>

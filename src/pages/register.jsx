@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import styles from './login.module.css';
 import { Button, EmailInput, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Link } from 'react-router-dom';
@@ -11,7 +11,7 @@ export function RegisterPage() {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
 
-  const { isLoading, isError } = useSelector(state => state.user);
+  const { isAuthenticated, isLoading, isError } = useSelector(state => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -37,6 +37,14 @@ export function RegisterPage() {
       }, ()=> {
         navigate('/')
       }))
+  }
+
+  if (isAuthenticated) {
+    return (
+      <Navigate
+        to={'/'}
+      />
+    );
   }
 
   return (
