@@ -7,7 +7,7 @@ const checkRes = (res) => {
 }
 
 
-async function getIngredients() {
+async function getIngredientsRequest() {
   const res = await fetch(`${URL}/ingredients`);
   return checkRes(res);
 }
@@ -163,7 +163,7 @@ async function logOutRequest() {
 }
 
 export {
-  getIngredients,
+  getIngredientsRequest,
   postOrder,
   recoveryPassword,
   resetPassword,
