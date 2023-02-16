@@ -26,7 +26,7 @@ async function postOrder(ids) {
 }
 
 async function recoveryPassword(email) {
-  const res = await fetch('https://norma.nomoreparties.space/api/password-reset',
+  const res = await fetch(`${URL}/password-reset`,
     {
       method: 'POST',
       mode: 'cors',
@@ -41,7 +41,7 @@ async function recoveryPassword(email) {
 }
 
 async function resetPassword(password, code) {
-  const res = await fetch('https://norma.nomoreparties.space/api/password-reset/reset',
+  const res = await fetch(`${URL}/password-reset/reset`,
     {
       method: 'POST',
       mode: 'cors',
@@ -56,7 +56,7 @@ async function resetPassword(password, code) {
 }
 
 async function loginRequest(form) {
-  const res = await fetch('https://norma.nomoreparties.space/api/auth/login', {
+  const res = await fetch(`${URL}/auth/login`, {
     method: 'POST',
     mode: 'cors',
     cache: 'no-cache',
@@ -73,7 +73,7 @@ async function loginRequest(form) {
 }
 
 async function registerRequest(form) {
-  const res = await fetch('https://norma.nomoreparties.space/api/auth/register', {
+  const res = await fetch(`${URL}/auth/register`, {
     method: 'POST',
     mode: 'cors',
     cache: 'no-cache',
@@ -91,7 +91,7 @@ async function registerRequest(form) {
 }
 
 async function userRequest() {
-  const res = await fetch('https://norma.nomoreparties.space/api/auth/user', {
+  const res = await fetch(`${URL}/auth/user`, {
     method: 'GET',
     mode: 'cors',
     cache: 'no-cache',
@@ -107,7 +107,7 @@ async function userRequest() {
 }
 
 async function userChangeRequest(form) {
-  const res = await fetch('https://norma.nomoreparties.space/api/auth/user', {
+  const res = await fetch(`${URL}/auth/user`, {
     method: 'PATCH',
     mode: 'cors',
     cache: 'no-cache',
@@ -144,7 +144,7 @@ const saveTokens = (refreshToken, accessToken) => {
 }
 
 async function logOutRequest() {
-  const res = await fetch('https://norma.nomoreparties.space/api/auth/logout', {
+  const res = await fetch(`${URL}/auth/logout`, {
     method: 'POST',
     mode: 'cors',
     cache: 'no-cache',
