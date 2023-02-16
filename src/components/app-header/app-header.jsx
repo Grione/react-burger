@@ -5,6 +5,7 @@ import { Link, NavLink, useMatch } from 'react-router-dom';
 function AppHeader() {
   const inActiveClass = `${headerStyles['header-link']} p-4 text text_type_main-default text_color_inactive`;
   const activeClass = `${headerStyles['header-link']} p-4 text text_type_main-default`;
+
   return (
     <header className={`${headerStyles.header} p-4`}>
       <div className={`container ${headerStyles.container}`}>
@@ -30,7 +31,7 @@ function AppHeader() {
           <Logo />
         </Link>
         <NavLink to="/profile" className={({ isActive }) => isActive ? activeClass : inActiveClass}>
-          <ProfileIcon type={useMatch('/profile') ? 'primary' : 'secondary' } />
+          <ProfileIcon type={useMatch('/profile/*') ? 'primary' : 'secondary' } />
           <span>Личный кабинет</span>
         </NavLink>
       </div>
