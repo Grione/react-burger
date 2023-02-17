@@ -33,6 +33,8 @@ export default function ProfileForm() {
 
   }
 
+  const isDisabled = !!((user.name === formValue.name && user.email === formValue.email) && (!formValue.password));
+
   return (
     <>
       <form onSubmit={submitHandler}>
@@ -66,16 +68,19 @@ export default function ProfileForm() {
               placeholder={'Пароль'}
               type={'password'}
               icon={'EditIcon'}
-              autoComplete='off'
+              autoComplete="new-password"
               name='password'
             />
           </li>
         </ul>
 
-        <div className={`mt-2 ${styles.bottom}`}>
-          <button onClick={rejectForm} type="button" className={`${styles.reject} text text_type_main-default text_color_inactive`}>Отмена</button>
-          <Button htmlType="submit" type="primary" size="medium">Сохранить</Button>
-        </div>
+        {!isDisabled && (
+          <div className={`mt-2 ${styles.bottom}`}>
+            <button onClick={rejectForm} type="button" className={`${styles.reject} text text_type_main-default text_color_inactive`}>Отмена</button>
+            <Button htmlType="submit" type="primary" size="medium">Сохранить</Button>
+          </div>
+        )}
+
       </form>
     </>
   )
