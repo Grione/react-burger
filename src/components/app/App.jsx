@@ -37,10 +37,20 @@ function App() {
       <main className='main container'>
         <Routes location={background || location}>
           <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/login" element={<ProtectedRouteElement
+            anonym={true}
+            element={<LoginPage />} />} />
+          <Route path="/register" element={<ProtectedRouteElement
+            anonym={true}
+            element={<RegisterPage />} />} />
+          <Route path="/forgot-password"
+            element={<ProtectedRouteElement
+              anonym={true}
+              element={<ForgotPassword />} />} />
+          <Route path="/reset-password"
+            element={<ProtectedRouteElement
+              anonym={true}
+              element={<ResetPassword />} />} />
           <Route path="/profile" element={<ProtectedRouteElement element={<ProfilePage />} />}>
             <Route path="orders" element={<p>Orders</p>} />
           </Route>

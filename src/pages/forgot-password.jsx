@@ -2,11 +2,10 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import styles from './login.module.css';
 import { Button, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Link, useNavigate, Navigate } from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 import { recoveryPassword } from '../utils/burger-api';
 
 export function ForgotPassword() {
-  const { isAuthenticated } = useSelector(state => state.user);
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [error, setError] = useState(false);
@@ -24,14 +23,6 @@ export function ForgotPassword() {
     }, () => {
       setError(true)
     });
-  }
-
-  if (isAuthenticated) {
-    return (
-      <Navigate
-        to={'/'}
-      />
-    );
   }
 
   return (

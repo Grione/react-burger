@@ -2,14 +2,14 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from './login.module.css';
 import { Button, EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { loginUser } from '../services/actions/auth-actions';
 
 export function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { isAuthenticated, isLoading, isError } = useSelector(state => state.user);
+  const { isLoading } = useSelector(state => state.user);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -27,14 +27,6 @@ export function LoginPage() {
     dispatch(loginUser({ "email": email, "password": password }, () => {
       navigate('/', { replace: true });
     }));
-  }
-
-  if (isAuthenticated) {
-    return (
-      <Navigate
-        to={'/'}
-      />
-    );
   }
 
   return (
@@ -58,7 +50,6 @@ export function LoginPage() {
             <div style={{ textAlign: "center" }}>
               <Button htmlType="submit" disabled={isLoading} >Войти</Button>
             </div>
-            {isError && <div style={{ textAlign: "center" }} className="mt-4 mb-4 text text_type_main-default text_color_inactive">Произошла ошибка</div>}
           </form>
 
 

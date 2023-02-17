@@ -13,7 +13,7 @@ export function IngredientPage() {
 
   const { id } = useParams();
   const ingredients = useSelector((state) => state.ingredients.ingredients);
-  let ingredient = ingredients.find((el) => el._id === id);
+  const ingredient = ingredients.find((el) => el._id === id);
 
 
   if (!ingredient) return

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styles from './login.module.css';
 import { Button, EmailInput, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Link } from 'react-router-dom';
@@ -11,7 +11,7 @@ export function RegisterPage() {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
 
-  const { isAuthenticated, isLoading, isError } = useSelector(state => state.user);
+  const { isLoading } = useSelector(state => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -34,17 +34,9 @@ export function RegisterPage() {
         "email": email,
         "password": password,
         "name": name
-      }, ()=> {
+      }, () => {
         navigate('/')
       }))
-  }
-
-  if (isAuthenticated) {
-    return (
-      <Navigate
-        to={'/'}
-      />
-    );
   }
 
   return (
@@ -76,7 +68,6 @@ export function RegisterPage() {
             <div className='mb-20' style={{ textAlign: "center" }}>
               <Button htmlType="submit" disabled={isLoading}>Зарегистрироваться</Button>
             </div>
-            {isError && <p className='mt-2 text_color_inactive text text_type_main-default'>Произошла ошибка</p>}
           </form>
           <div className="actions">
             <div style={{ textAlign: 'center' }}>

@@ -1,16 +1,21 @@
-import { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { Navigate, useLocation } from 'react-router-dom';
+import { getCookie } from '../../utils/cookie';
 
-export function ProtectedRouteElement({ element }) {
-  const { user } = useSelector(state => state.user)
-  const [auth, setAuth] = useState(false)
+export function ProtectedRouteElement({ element, anonym = false }) {
+  const isLogged = getCookie('accessToken');
+  const location = useLocation();
+  const from = location.state?.from || "/";
 
-  useEffect(() => {
-    setAuth(true)
-  }, [user])
+  console.log('from',from);
+  console.log('isLogged',isLogged);
 
-  if (!auth) { return null }
+  if (anonym && isLogged) {
+    return <Navigate to={from} />
+  }
 
-  return user ? element : <Navigate to="/login" replace/>;
+  if (!anonym && !isLogged) {
+    return <Navigate to='/login' state={{ from: location }} />
+  }
+
+  return element;
 }
