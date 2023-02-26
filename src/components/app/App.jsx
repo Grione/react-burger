@@ -1,50 +1,76 @@
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
-import { GET_INGREDIENTS_REQUEST, GET_INGREDIENTS_SUCCESS, GET_INGREDIENTS_ERROR } from '../../services/action-types';
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { getUser } from "../../services/actions/auth-actions";
 import AppHeader from '../app-header/app-header';
-import BurgerIngredients from '../burger-ingredients/burger-ingredients';
-import BurgerConstructor from '../burger-constructor/burger-constructor';
-import { getIngredients } from '../../utils/burger-api';
+import {
+  HomePage,
+  LoginPage,
+  RegisterPage,
+  ForgotPassword,
+  ResetPassword,
+  ProfilePage,
+  IngredientPage,
+  NotFound404
+} from '../../pages/';
+import { ProtectedRouteElement } from "../protected-route-element/proptected-route-element";
+import Modal from "../modal/modal";
+import IngredientDetails from "../ingredient-details/ingredient-details";
+import { getIngredients } from "../../services/actions/ingredients-actions";
+
 
 function App() {
 
-  const { isLoading, hasError, ingredients } = useSelector(state => state.ingredients);
   const dispatch = useDispatch();
+  const location = useLocation();
+  const background = location.state && location.state.background;
 
   useEffect(() => {
-    dispatch({ type: GET_INGREDIENTS_REQUEST });
-    getIngredients()
-      .then((data) => {
-        dispatch({ type: GET_INGREDIENTS_SUCCESS, payload: data.data })
-      })
-      .catch((error) => {
-        dispatch({ type: GET_INGREDIENTS_ERROR })
-      })
-  }, [dispatch]);
+    dispatch(getUser())
+    dispatch(getIngredients())
+  }, [dispatch])
 
   return (
+
     <div className='wrapper'>
       <AppHeader />
       <main className='main container'>
-        {isLoading && 'Loading...'}
-        {hasError && 'Erron defined'}
+        <Routes location={background || location}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<ProtectedRouteElement
+            anonym={true}
+            element={<LoginPage />} />} />
+          <Route path="/register" element={<ProtectedRouteElement
+            anonym={true}
+            element={<RegisterPage />} />} />
+          <Route path="/forgot-password"
+            element={<ProtectedRouteElement
+              anonym={true}
+              element={<ForgotPassword />} />} />
+          <Route path="/reset-password"
+            element={<ProtectedRouteElement
+              anonym={true}
+              element={<ResetPassword />} />} />
+          <Route path="/profile" element={<ProtectedRouteElement element={<ProfilePage />} />}>
+            <Route path="orders" element={<p>Orders</p>} />
+          </Route>
+          <Route path="/ingredient/:id" element={<IngredientPage />} />
+          <Route path="*" element={<NotFound404 />} />
+        </Routes>
         {
-          !isLoading && !hasError && (
-            <>
-              <DndProvider backend={HTML5Backend}>
-                <BurgerIngredients data={ingredients} />
-                <BurgerConstructor />
-              </DndProvider>
-            </>
-
-
+          background && (
+            <Routes>
+              <Route
+                path="/ingredient/:id"
+                element={<Modal title="Детали ингредиента">
+                  <IngredientDetails />
+                </Modal>} />
+            </Routes>
           )
-
         }
       </main>
     </div>
+
   );
 }
 

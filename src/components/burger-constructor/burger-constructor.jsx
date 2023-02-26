@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { GET_ORDER_REQUEST, GET_ORDER_SUCCESS, GET_ORDER_ERROR, CLOSE_ORDER_MODAL } from '../../services/action-types';
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import ConstructorList from './constructor-list';
@@ -10,9 +11,12 @@ import ConstructorStyles from './burger-constructor.module.css';
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const isModal = useSelector(state => state.order.isModal);
 
   const ingredients = useSelector(state => state.ingredients.constructorIngredients);
+  const { isAuthenticated } = useSelector(state => state.user);
+
   const bun = useSelector(state => state.ingredients.constructorBun[0]);
 
   const totalPrice = useMemo(() => {
@@ -25,6 +29,10 @@ function BurgerConstructor() {
 
   function sendOrder(ingredients) {
     if (!ingredients.length) return;
+    if (!isAuthenticated) {
+      navigate('/login');
+      return;
+    }
     const ids = [...ingredients.map((el) => el._id), bun._id];
     dispatch({ type: GET_ORDER_REQUEST })
     postOrder(ids).then((data) => {

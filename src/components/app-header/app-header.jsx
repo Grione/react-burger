@@ -1,33 +1,39 @@
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import headerStyles from './app-header.module.css';
+import { Link, NavLink, useMatch } from 'react-router-dom';
 
 function AppHeader() {
+  const inActiveClass = `${headerStyles['header-link']} p-4 text text_type_main-default text_color_inactive`;
+  const activeClass = `${headerStyles['header-link']} p-4 text text_type_main-default`;
+
   return (
     <header className={`${headerStyles.header} p-4`}>
       <div className={`container ${headerStyles.container}`}>
         <nav className={headerStyles.navigation}>
           <ul>
             <li>
-              <a href='/' className={`${headerStyles['header-link']} p-4 text text_type_main-default`}>
-                <BurgerIcon />
+              <NavLink to='/'
+                className={({ isActive }) => isActive ? activeClass : inActiveClass}
+              >
+                <BurgerIcon type={useMatch('/') ? 'primary' : 'secondary' }/>
                 <span>Конструктор</span>
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a href='/' className={`${headerStyles['header-link']} p-4 text text_type_main-default text_color_inactive`} >
-                <ListIcon type="secondary" />
+              <NavLink to='/history' className={({ isActive }) => isActive ? activeClass : inActiveClass} >
+                <ListIcon type={useMatch('/history') ? 'primary' : 'secondary' } />
                 <span>Лента заказов</span>
-              </a>
+              </NavLink>
             </li>
           </ul>
         </nav>
-        <a href="/" className={headerStyles['header-logo']}>
+        <Link to="/" className={headerStyles['header-logo']}>
           <Logo />
-        </a>
-        <a href="/" className={`${headerStyles['header-link']} p-4 text text_type_main-default text_color_inactive`}>
-          <ProfileIcon type="secondary" />
+        </Link>
+        <NavLink to="/profile" className={({ isActive }) => isActive ? activeClass : inActiveClass}>
+          <ProfileIcon type={useMatch('/profile/*') ? 'primary' : 'secondary' } />
           <span>Личный кабинет</span>
-        </a>
+        </NavLink>
       </div>
     </header>
   )
