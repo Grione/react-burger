@@ -1,0 +1,32 @@
+:root {
+  --shadow-box-color_modal: rgba(0, 0, 0, 0.04);
+  --border-color_modal: rgba(76, 76, 255, 0.2);
+  --bg-color_overlay: rgba(0, 0, 0, 0.6);
+  --bg-color_element: #1c1c21;
+  --text-color_ready: #00cccc;
+  --gradient-color_1: #4c4cff;
+  --gradient-color_2: #801ab2;
+}
+
+.container {
+  width: 64px;
+  height: 64px;
+  position: relative;
+  border-radius: 100px;
+  border: 2px solid transparent;
+  box-sizing: border-box;
+  background: linear-gradient(var(--bg-color_element), var(--bg-color_element))
+      content-box,
+    linear-gradient(var(--gradient-color_1), var(--gradient-color_2)) border-box;
+}
+
+.picture {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.overflow {
+  background: var(--bg-color_overlay) content-box;
+}

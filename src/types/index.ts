@@ -29,3 +29,44 @@ export type TLogin = {
 export type TRegister = TLogin & {
   name: string;
 }
+
+export type WebSocketEvent = Event & {
+  data?: string;
+};
+
+export type WebSocketMessage = {
+  success: boolean;
+  [key: string]: any;
+};
+
+export interface IInitialStateStringBool {
+  [name: string]: boolean;
+}
+
+export interface IWsState {
+  wsConnected: boolean;
+  orders: {
+    orders: IWsObj[];
+  };
+  error: any;
+}
+
+export type IWsObj = {
+  ingredients: string[];
+  _id: string;
+  status: string;
+  number: number;
+  createdAt: string;
+  updatedAt: string;
+  name: string;
+};
+
+export interface IWsAction {
+  type: string;
+  payload: any;
+}
+
+export interface IAction {
+  type: string;
+  payload?: any;
+}

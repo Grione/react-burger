@@ -3,7 +3,7 @@ import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-dev
 import headerStyles from './app-header.module.css';
 import { Link, NavLink, useMatch } from 'react-router-dom';
 
-const AppHeader: FC = ()=> {
+const AppHeader: FC = () => {
   const inActiveClass = `${headerStyles['header-link']} p-4 text text_type_main-default text_color_inactive`;
   const activeClass = `${headerStyles['header-link']} p-4 text text_type_main-default`;
 
@@ -21,8 +21,8 @@ const AppHeader: FC = ()=> {
               </NavLink>
             </li>
             <li>
-              <NavLink to='/history' className={({ isActive }) => isActive ? activeClass : inActiveClass} >
-                <ListIcon type={useMatch('/history') ? 'primary' : 'secondary'} />
+              <NavLink to='/feed' className={({ isActive }) => isActive ? activeClass : inActiveClass} >
+                <ListIcon type={useMatch('/feed') ? 'primary' : 'secondary'} />
                 <span>Лента заказов</span>
               </NavLink>
             </li>

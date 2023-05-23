@@ -2,7 +2,6 @@ import { getCookie, setCookie } from "./cookie";
 import { TLogin, TRegister } from "../types";
 
 const URL = 'https://norma.nomoreparties.space/api';
-
 const checkRes = <T>(res: Response): Promise<T> => {
   return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 }
@@ -12,14 +11,20 @@ async function getIngredientsRequest() {
   return checkRes(res);
 }
 
+async function getOrder(number:string) {
+  const res = await fetch(`${URL}/orders/${number}`);
+  return checkRes(res);
+}
+
 async function postOrder(ids: number[]) {
   const res = await fetch(`${URL}/orders`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json;charset=utf-8'
+      'Content-Type': 'application/json;charset=utf-8',
+      authorization: getCookie('accessToken') || "",
     },
     body: JSON.stringify({
-      "ingredients": ids
+      "ingredients": ids,
     })
   });
   return checkRes(res);
@@ -178,5 +183,6 @@ export {
   refreshTokenRequest,
   saveTokens,
   userChangeRequest,
-  logOutRequest
+  logOutRequest,
+  getOrder,
 }

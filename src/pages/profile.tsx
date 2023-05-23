@@ -2,7 +2,6 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import styles from './profile.module.css';
-import ProfileForm from '../components/profile/profile-form';
 import { logOut } from '../services/actions/auth-actions';
 import { deleteCookie } from '../utils/cookie';
 
@@ -52,7 +51,6 @@ export function ProfilePage() {
             изменить свои персональные данные</p>
         </div>
         <div>
-          <ProfileForm />
           <Outlet />
         </div>
       </div>

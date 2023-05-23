@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import ModalOverlay from '../modal-overlay/modal-overlay';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import modalStyles from './modal.module.css';
@@ -36,7 +36,7 @@ const Modal: FC<PropsWithChildren<IModalProps>> = (props) => {
     if (close) {
       close()
     } else {
-      navigate('/');
+      navigate(-1);
     }
 
   }
