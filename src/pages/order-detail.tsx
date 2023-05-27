@@ -5,7 +5,8 @@ import Styles from './order-detail.module.css';
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getOrderAction } from "../services/actions/getOrder-actions";
-import { useSelector } from "react-redux";
+import { useSelector } from "../services/hooks";
+import { TIngredient } from "../types";
 
 export function OrderDetailPage() {
   const { id } = useParams();
@@ -15,17 +16,16 @@ export function OrderDetailPage() {
     dispatch(getOrderAction(id))
   }, [dispatch, id])
 
-  const { order } = useSelector((state: any) => state.getOrderReducer);
-  const allIngredients = useSelector((state: any) => state.ingredients.ingredients);
+  const { order } = useSelector((state) => state.getOrderReducer);
+  const allIngredients = useSelector((state) => state.ingredients.ingredients);
 
+  if (order.ingredients) {
+    const ingrObjects = order.ingredients.map((id) => allIngredients.find((ingr: TIngredient) => id && ingr._id === id));
 
-  if (order) {
-    const ingrObjects = order.ingredients.map((id: string) => allIngredients.find((ingr: any) => id && ingr._id === id));
-
-    const prices = ingrObjects.map((obj: any) => obj && obj.price)
+    const prices = ingrObjects.map((obj: TIngredient) => obj && obj.price)
     const totalPrice = prices.reduce((price: number, acc: number) => price + acc, 0)
 
-    const ingredients = ingrObjects.map((el: any, index: number) =>
+    const ingredients = ingrObjects.map((el: TIngredient, index: number) =>
     (
       <li className={Styles.card} key={el._id}>
         <FeedIngredientIcon src={el.image_mobile} srcSet={el.image_mobile} zIndex={1} />

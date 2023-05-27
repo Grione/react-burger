@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/hooks';
 import { Link, useLocation } from 'react-router-dom';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerIngredientsCardStyles from './burger-ingredients-card.module.css';
@@ -6,8 +6,8 @@ import { useDrag } from "react-dnd";
 import { TIngredient } from '../../types';
 
 function BurgerIngredientsCard({ card }: { card: TIngredient }) {
-  const constructorIngredientCount = useSelector((state: any) => state.ingredients.constructorIngredients.filter((item:TIngredient) => item._id === card._id).length);
-  const bunCount = useSelector((state: any) => state.ingredients.constructorBun.filter((item: TIngredient) => item._id === card._id).length);
+  const constructorIngredientCount = useSelector((state) => state.ingredients.constructorIngredients.filter((item:TIngredient) => item._id === card._id).length);
+  const bunCount = useSelector((state) => state.ingredients.constructorBun.filter((item: TIngredient) => item._id === card._id).length);
   const count = card.type === 'bun' ? bunCount : constructorIngredientCount;
 
   const location = useLocation();

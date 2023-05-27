@@ -4,13 +4,30 @@ import {
   GET_ORDER_FEED_ERROR
 } from '../action-types';
 
-const initialState: any = {
-  isLoading: true,
-  hasError: false,
-  order: false
+import { TOrder } from '../../types';
+
+type TInitialState = {
+  isLoading: boolean,
+  hasError: boolean,
+  order: TOrder,
 }
 
-const getOrderReducer = (state = initialState, action: { type: string, payload?: any }) => {
+
+const initialState: TInitialState = {
+  isLoading: true,
+  hasError: false,
+  order: {
+    ingredients: [],
+    _id: "",
+    status: "",
+    number: 0,
+    createdAt: '',
+    updatedAt: '',
+    name: ''
+  }
+}
+
+const getOrderReducer = (state = initialState, action: { type: string, payload?: any }): TInitialState => {
   switch (action.type) {
     case GET_ORDER_FEED_REQUEST:
       return {

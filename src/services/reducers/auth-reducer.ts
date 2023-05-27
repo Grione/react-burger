@@ -13,7 +13,17 @@ import {
   LOGOUT_USER_ERROR
 } from "../action-types";
 
-const initialState = {
+type TInitialState = {
+  isLoading: boolean,
+  isError: boolean,
+  isAuthenticated: boolean,
+  user: {
+    email: string,
+    name: string,
+  }
+}
+
+const initialState:TInitialState = {
   isAuthenticated: false,
   isLoading: false,
   isError: false,
@@ -23,7 +33,7 @@ const initialState = {
   }
 }
 
-export const authReducer = (state = initialState, action: { type: string, payload?: any }) => {
+export const authReducer = (state = initialState, action: { type: string, payload?: any }): TInitialState => {
   switch (action.type) {
     case GET_USER_REQUEST:
       return {
@@ -97,7 +107,7 @@ export const authReducer = (state = initialState, action: { type: string, payloa
         isLoading: false,
         isError: false,
         isAuthenticated: false,
-        user: null
+        user: initialState.user
       }
     case LOGOUT_USER_ERROR:
       return {

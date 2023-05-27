@@ -10,6 +10,16 @@ import {
   REORDER_INGREDIENTS
 } from '../action-types';
 
+import { TOrder } from '../../types';
+
+type TInitialState = {
+  isLoading: boolean,
+  hasError: boolean,
+  ingredients: Array<TOrder>,
+  constructorIngredients: Array<TOrder>,
+  constructorBun: Array<TOrder>
+}
+
 const initialState: any = {
   isLoading: true,
   hasError: false,

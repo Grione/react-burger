@@ -14,7 +14,7 @@ export function ForgotPassword() {
   }
 
   const onSubmitHandler = async () => {
-    await recoveryPassword(email).then((resp: any) => {
+    await recoveryPassword(email).then((resp:any) => {
       if (resp.success) {
         navigate("/reset-password", { state: { email } });
         setError(false)

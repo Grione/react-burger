@@ -19,10 +19,10 @@ import {
 
 const initialState: IWsState = {
   wsConnected: false,
-  orders: {
-    orders: [],
-  },
+  orders: [],
   error: "",
+  total: 0,
+  totalToday: 0
 };
 
 export const wsReducer = (state = initialState, action: IWsAction) => {
@@ -56,7 +56,9 @@ export const wsReducer = (state = initialState, action: IWsAction) => {
       return {
         ...state,
         error: "",
-        orders: action.payload,
+        orders: action.payload.data.orders,
+        total: action.payload.data.total,
+        totalToday: action.payload.data.totalToday
       };
     default:
       return state;
@@ -94,7 +96,7 @@ export const userWsReducer = (state = initialState, action: IWsAction) => {
       return {
         ...state,
         error: undefined,
-        orders: action.payload,
+        orders: action.payload.data.orders,
       };
     default:
       return state;

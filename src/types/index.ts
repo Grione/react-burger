@@ -1,5 +1,10 @@
+import { store } from "../services/store";
+
+export type RootState = ReturnType<typeof store.getState>;
+
 export type TIngredient = {
-  readonly _id: string,
+  readonly _id?: string,
+  readonly id?: string,
   readonly name: string,
   readonly type: string,
   readonly proteins: number,
@@ -45,10 +50,10 @@ export interface IInitialStateStringBool {
 
 export interface IWsState {
   wsConnected: boolean;
-  orders: {
-    orders: IWsObj[];
-  };
+  orders: IWsObj[];
   error: any;
+  total: number,
+  totalToday: number
 }
 
 export type IWsObj = {
@@ -70,3 +75,34 @@ export interface IAction {
   type: string;
   payload?: any;
 }
+
+export type TOrder = {
+  ingredients: Array<string>,
+  _id: string,
+  status: string,
+  number: number,
+  createdAt: string,
+  updatedAt: string,
+  name: string,
+  key?:string,
+}
+
+export type TOrders = {
+  success: boolean,
+  orders: Array<IWsObj>,
+  total: number,
+  totalToday: number
+}
+
+export type TUserOrders = {
+  success: boolean,
+  orders: Array<IWsObj>
+}
+
+export type TWSActions = {
+  readonly wsInit: string
+  readonly onOpen: string
+  readonly onClose: string
+  readonly onError: string
+  readonly onMessage: string
+};

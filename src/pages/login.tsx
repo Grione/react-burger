@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useSelector } from '../services/hooks';
 import styles from './login.module.css';
 import { Button, EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Link, useNavigate } from 'react-router-dom';
@@ -9,7 +10,7 @@ export function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { isLoading } = useSelector((state: any) => state.user);
+  const { isLoading } = useSelector((state) => state.user);
 
   const dispatch = useDispatch<any>();
   const navigate = useNavigate();

@@ -21,7 +21,7 @@ async function postOrder(ids: number[]) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
-      authorization: getCookie('accessToken') || "",
+      authorization: 'Bearer ' + getCookie('accessToken') || "",
     },
     body: JSON.stringify({
       "ingredients": ids,
@@ -124,7 +124,7 @@ async function userChangeRequest(data: {
     credentials: 'same-origin',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
-      authorization: getCookie('accessToken') || "",
+      authorization: 'Bearer ' + getCookie('accessToken') || "",
     },
     body: JSON.stringify(data),
     redirect: 'follow',
@@ -149,7 +149,7 @@ async function refreshTokenRequest() {
 }
 
 const saveTokens = (refreshToken: string, accessToken: string) => {
-  setCookie('accessToken', accessToken);
+  setCookie('accessToken', accessToken.split('Bearer ')[1]);
   localStorage.setItem('refreshToken', refreshToken);
 }
 
