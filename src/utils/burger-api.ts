@@ -104,7 +104,7 @@ async function userRequest() {
     credentials: 'same-origin',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
-      authorization: getCookie('accessToken') || "",
+      authorization: 'Bearer ' + getCookie('accessToken') || "",
     },
     redirect: 'follow',
     referrerPolicy: 'no-referrer',

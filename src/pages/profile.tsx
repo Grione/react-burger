@@ -15,8 +15,8 @@ export function ProfilePage() {
 
   const logoutHandler = () => {
     dispatch(logOut(() => {
-      navigate('/login');
       deleteCookie('accessToken');
+      navigate('/login');
     }));
   }
 
