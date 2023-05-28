@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getOrderAction } from "../services/actions/getOrder-actions";
 import { useSelector } from "../services/hooks";
-import { TIngredient } from "../types";
+import { TIngredient, TOrder } from "../types";
 
 export function OrderDetailPage() {
   const { id } = useParams();
@@ -19,24 +19,31 @@ export function OrderDetailPage() {
   const { order } = useSelector((state) => state.getOrderReducer);
   const allIngredients = useSelector((state) => state.ingredients.ingredients);
 
-  if (order.ingredients) {
-    const ingrObjects = order.ingredients.map((id) => allIngredients.find((ingr: TIngredient) => id && ingr._id === id));
+  if (order.ingredients !== null && order.ingredients !== undefined && allIngredients.length > 0) {
+    const ingrObjects = order.ingredients.map((id) => allIngredients.find((ingr) => ingr._id === id));
+    const isIngrObjects = ingrObjects.some((el)=> el === undefined || el === null )
+    let totalPrice;
+    let prices = [];
 
-    const prices = ingrObjects.map((obj: TIngredient) => obj && obj.price)
-    const totalPrice = prices.reduce((price: number, acc: number) => price + acc, 0)
+    let ingredients = null;
 
-    const ingredients = ingrObjects.map((el: TIngredient, index: number) =>
-    (
-      <li className={Styles.card} key={el._id}>
-        <FeedIngredientIcon src={el.image_mobile} srcSet={el.image_mobile} zIndex={1} />
-        <h2 className="text text_type_main-default ml-4">{el.name}</h2>
-        <div className={Styles.total}>
-          <span className="text text_type_digits-default ml-4">{`${el.price}`}</span>
-          <CurrencyIcon type="primary" />
-        </div>
-      </li>
-    )
-    )
+    if (!isIngrObjects && ingrObjects.length > 0) {
+      prices = ingrObjects.map((obj) => obj!.price);
+      totalPrice = prices.reduce((acc, price) => price + acc, 0);
+
+      ingredients = ingrObjects.map((el) =>
+      (
+        <li className={Styles.card} key={el?._id}>
+          {el?.image_mobile ? <FeedIngredientIcon src={el?.image_mobile} srcSet={el?.image_mobile} zIndex={1} /> : ''}
+          <h2 className="text text_type_main-default ml-4">{el?.name}</h2>
+          <div className={Styles.total}>
+            <span className="text text_type_digits-default ml-4">{`${el?.price}`}</span>
+            <CurrencyIcon type="primary" />
+          </div>
+        </li>
+      )
+      )
+    } 
 
     return (
       <>

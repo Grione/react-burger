@@ -2,7 +2,6 @@ import { FC } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from '../services/hooks';
 import ingredientDetailsStyles from '../components/ingredient-details/ingredient-details.module.css';
-import { TIngredient } from '../types';
 
 const styles = {
   display: 'flex',
@@ -14,7 +13,7 @@ const styles = {
 export const IngredientPage: FC = () => {
   const { id } = useParams();
   const ingredients = useSelector((state) => state.ingredients.ingredients);
-  const ingredient = ingredients.find((el:TIngredient) => el._id === id);
+  const ingredient = ingredients.find((el) => el._id === id);
 
   if (!ingredient) return null;
   return (
