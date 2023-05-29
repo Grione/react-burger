@@ -10,7 +10,8 @@ import {
   REORDER_INGREDIENTS
 } from '../action-types';
 
-import { TIngredient, TOrder } from '../../types';
+import { TIngredient } from '../../types';
+import { TUnionAction } from '../actions/interfaces';
 
 type TInitialState = {
   isLoading: boolean,
@@ -28,7 +29,7 @@ const initialState: TInitialState = {
   constructorBun: []
 }
 
-const ingredientsReducer = (state = initialState, action: { type: string, payload?: any }): TInitialState => {
+const ingredientsReducer = (state = initialState, action: TUnionAction): TInitialState => {
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST:
       return {
@@ -73,10 +74,6 @@ const ingredientsReducer = (state = initialState, action: { type: string, payloa
       return {
         ...state
       }
-/*       return {
-        ...state,
-        constructorBun: [state.ingredients.find((item) => item._id === action.payload)]
-      } */
     case REMOVE_INGREDIENT:
       return {
         ...state,

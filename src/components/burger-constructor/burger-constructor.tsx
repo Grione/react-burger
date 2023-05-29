@@ -1,6 +1,5 @@
 import { useMemo, FC } from 'react';
-import { useDispatch } from 'react-redux';
-import { useSelector } from '../../services/hooks';
+import { useSelector, useDispatch } from '../../services/hooks';
 import { useNavigate } from 'react-router-dom';
 import { GET_ORDER_REQUEST, GET_ORDER_SUCCESS, GET_ORDER_ERROR, CLOSE_ORDER_MODAL } from '../../services/action-types';
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';

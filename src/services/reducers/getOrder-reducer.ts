@@ -5,6 +5,7 @@ import {
 } from '../action-types';
 
 import { TOrder } from '../../types';
+import { TUnionAction } from '../actions/interfaces';
 
 type TInitialState = {
   isLoading: boolean,
@@ -27,7 +28,7 @@ const initialState: TInitialState = {
   }
 }
 
-const getOrderReducer = (state = initialState, action: { type: string, payload?: any }): TInitialState => {
+const getOrderReducer = (state = initialState, action: TUnionAction): TInitialState => {
   switch (action.type) {
     case GET_ORDER_FEED_REQUEST:
       return {

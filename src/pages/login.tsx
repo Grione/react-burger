@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useSelector } from '../services/hooks';
+import { useSelector, useDispatch } from '../services/hooks';
 import styles from './login.module.css';
 import { Button, EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Link, useNavigate } from 'react-router-dom';
@@ -12,7 +11,7 @@ export function LoginPage() {
 
   const { isLoading } = useSelector((state) => state.user);
 
-  const dispatch = useDispatch<any>();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>): void => {

@@ -1,5 +1,4 @@
-import { useDispatch } from 'react-redux';
-import { useSelector } from '../../services/hooks';
+import { useSelector, useDispatch } from '../../services/hooks';
 import ConstructorCard from './constructor-card';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import BlankIngredient from './blank-ingredient';

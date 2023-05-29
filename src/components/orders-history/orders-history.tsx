@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { useSelector } from '../../services/hooks';
+import { useSelector, useDispatch } from '../../services/hooks';
 
 import FeedCard from '../feed-card/feed-card';
 import FeedStyles from '../../pages/feed.module.css';

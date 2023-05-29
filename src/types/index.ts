@@ -84,7 +84,7 @@ export type TOrder = {
   createdAt: string,
   updatedAt: string,
   name: string,
-  key?:string,
+  key?: string,
 }
 
 export type TOrders = {
@@ -97,6 +97,16 @@ export type TOrders = {
 export type TUserOrders = {
   success: boolean,
   orders: Array<IWsObj>
+}
+
+export type TUser = {
+  isAuthenticated: boolean,
+  isLoading: boolean,
+  isError: boolean,
+  user: {
+    name: string,
+    email: string,
+  }
 }
 
 export type TWSActions = {

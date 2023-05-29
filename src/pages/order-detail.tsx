@@ -3,14 +3,12 @@ import { FeedIngredientIcon } from "../components/feed-ingredient-icon/feed-ingr
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import Styles from './order-detail.module.css';
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { getOrderAction } from "../services/actions/getOrder-actions";
-import { useSelector } from "../services/hooks";
-import { TIngredient, TOrder } from "../types";
+import { useSelector, useDispatch } from "../services/hooks";
 
 export function OrderDetailPage() {
   const { id } = useParams();
-  const dispatch = useDispatch()<any>;
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getOrderAction(id))

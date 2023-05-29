@@ -13,15 +13,10 @@ import {
   LOGOUT_USER_ERROR
 } from "../action-types";
 
-type TInitialState = {
-  isLoading: boolean,
-  isError: boolean,
-  isAuthenticated: boolean,
-  user: {
-    email: string,
-    name: string,
-  }
-}
+import { TUser } from "../../types";
+import { TUnionAction } from "../actions/interfaces";
+
+type TInitialState = TUser;
 
 const initialState:TInitialState = {
   isAuthenticated: false,
@@ -33,7 +28,7 @@ const initialState:TInitialState = {
   }
 }
 
-export const authReducer = (state = initialState, action: { type: string, payload?: any }): TInitialState => {
+export const authReducer = (state = initialState, action: TUnionAction): TInitialState => {
   switch (action.type) {
     case GET_USER_REQUEST:
       return {

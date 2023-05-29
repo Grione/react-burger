@@ -1,5 +1,5 @@
 import { FC, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../services/hooks";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { getUser } from "../../services/actions/auth-actions";
 import AppHeader from '../app-header/app-header';
@@ -25,7 +25,7 @@ import { OrdersHistory } from "../orders-history/orders-history";
 
 const App: FC = () => {
 
-  const dispatch = useDispatch<any>();
+  const dispatch = useDispatch();
   const location = useLocation();
   const background = location.state && location.state.background;
 

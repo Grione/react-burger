@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { useSelector } from '../services/hooks';
+import { useSelector, useDispatch  } from '../services/hooks';
 import FeedCard from '../components/feed-card/feed-card';
 import FeedStyles from './feed.module.css';
 import { wsConnectionStart, wsConnectionClosed } from '../services/actions/websockets';
