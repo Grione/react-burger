@@ -11,7 +11,10 @@ export function OrderDetailPage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getOrderAction(id))
+    if (id) {
+      dispatch(getOrderAction(id))
+    }
+
   }, [dispatch, id])
 
   const { order } = useSelector((state) => state.getOrderReducer);
@@ -19,7 +22,7 @@ export function OrderDetailPage() {
 
   if (order.ingredients !== null && order.ingredients !== undefined && allIngredients.length > 0) {
     const ingrObjects = order.ingredients.map((id) => allIngredients.find((ingr) => ingr._id === id));
-    const isIngrObjects = ingrObjects.some((el)=> el === undefined || el === null )
+    const isIngrObjects = ingrObjects.some((el) => el === undefined || el === null)
     let totalPrice;
     let prices = [];
 
@@ -41,7 +44,7 @@ export function OrderDetailPage() {
         </li>
       )
       )
-    } 
+    }
 
     return (
       <>

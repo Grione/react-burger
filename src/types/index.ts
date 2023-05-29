@@ -1,6 +1,13 @@
 import { store } from "../services/store";
+import { ThunkAction } from 'redux-thunk';
+import { ActionCreator } from 'redux';
+import { TUnionAction } from "../services/actions/interfaces";
 
 export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+export type AppThunk<ReturnType = void> = ActionCreator<
+  ThunkAction<ReturnType, RootState, never, TUnionAction>
+>;
 
 export type TIngredient = {
   readonly _id?: string,

@@ -89,7 +89,6 @@ export interface ILogoutUserRequest {
 
 export interface ILogoutUserSuccess {
   readonly type: typeof LOGOUT_USER_SUCCESS
-  readonly payload: TUser
 }
 
 export interface ILogoutUserError {

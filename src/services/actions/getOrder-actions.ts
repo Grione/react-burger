@@ -5,8 +5,9 @@ import {
 } from "../action-types";
 
 import { getOrder } from "../../utils/burger-api";
+import { AppThunk } from "../../types";
 
-export const getOrderAction = (order: any) => (dispatch: any) => {
+export const getOrderAction:AppThunk = (order: string) => (dispatch) => {
   dispatch({ type: GET_ORDER_FEED_REQUEST });
   getOrder(order)
     .then((data: any) => {

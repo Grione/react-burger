@@ -4,6 +4,7 @@ import {
   useSelector as selectorHook,
 } from "react-redux";
 
+import type {} from "redux-thunk/extend-redux";
 import { ThunkDispatch } from "redux-thunk";
 import { TUnionAction } from "./actions/interfaces";
 import { RootState } from "../types";
