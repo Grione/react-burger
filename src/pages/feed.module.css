@@ -8,6 +8,10 @@
   gap: 60px;
 }
 
+.done {
+  color: #00CCCC;
+}
+
 .list {
   height: 75vh;
   display: flex;

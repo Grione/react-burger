@@ -52,7 +52,7 @@ export function FeedPage() {
                 <h4 className='text text_type_main-medium mb-6'>Готовы:</h4>
                 {
                   ordersDone.slice(0, 10).map((el:{number:string}) => (
-                    <p key={el.number} className='text text_type_digits-default mb-2' style={{ color: '#00CCCC' }}>{el.number}</p>
+                    <p key={el.number} className={`text text_type_digits-default mb-2 ${FeedStyles.done}`}>{el.number}</p>
                   ))
                 }
               </div>

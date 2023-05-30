@@ -8,6 +8,10 @@
   flex-direction: column;
 }
 
+.title {
+  text-align: center;
+}
+
 .ingredients {
   display: flex;
   flex-direction: column;

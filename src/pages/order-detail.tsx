@@ -49,12 +49,10 @@ export function OrderDetailPage() {
     return (
       <>
         <div className={Styles.main}>
-          <span className="text text_type_digits-default" style={{ "textAlign": "center" }}>{id}</span>
+          <span className={`text text_type_digits-default ${Styles.title}`}>{id}</span>
           <h1 className="text text_type_main-medium mt-10 mb-3">{order.name}</h1>
           <span className="text text_type_main-small is-succes">{order.status}</span>
-
           <span className="text text_type_main-medium mt-15 mb-6">Состав:</span>
-
           <ul className={`${Styles.ingredients} pr-6 mb-10`}>
             {ingredients}
           </ul>
