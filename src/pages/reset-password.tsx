@@ -54,13 +54,13 @@ export function ResetPassword() {
                 required={true}
               />
             </div>
-            <div className='mb-20' style={{ textAlign: "center" }}>
+            <div className={`mb-20 ${styles.title}`}>
               <Button htmlType="submit" >Сохранить</Button>
             </div>
             {error && <div className="mt-2">Произошла ошибка</div>}
           </form>
           <div className="actions">
-            <div style={{ textAlign: 'center' }}>
+            <div className={styles.title}>
               <span className='text_color_inactive text text_type_main-default mr-1'>Вспомнили пароль?</span>
               <Link
                 to="/login"

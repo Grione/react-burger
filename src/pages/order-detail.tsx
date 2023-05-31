@@ -20,7 +20,7 @@ export function OrderDetailPage() {
   const { order } = useSelector((state) => state.getOrderReducer);
   const allIngredients = useSelector((state) => state.ingredients.ingredients);
 
-  if (order.ingredients !== null && order.ingredients !== undefined && allIngredients.length > 0) {
+  if (order.ingredients && allIngredients.length > 0) {
     const ingrObjects = order.ingredients.map((id) => allIngredients.find((ingr) => ingr._id === id));
     const isIngrObjects = ingrObjects.some((el) => el === undefined || el === null)
     let totalPrice;

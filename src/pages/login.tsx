@@ -47,14 +47,14 @@ export function LoginPage() {
                 value={password}
               />
             </div>
-            <div style={{ textAlign: "center" }}>
+            <div className={styles.title}>
               <Button htmlType="submit" disabled={isLoading} >Войти</Button>
             </div>
           </form>
 
 
           <div className="actions">
-            <div className="mb-4" style={{ textAlign: 'center' }}>
+            <div className={`mb-4 ${styles.title}`}>
               <span
                 className='text_color_inactive
                text text_type_main-default 
@@ -65,7 +65,7 @@ export function LoginPage() {
                 Зарегистрироваться
               </Link>
             </div>
-            <div style={{ textAlign: 'center' }}>
+            <div className={styles.title}>
               <span className='text_color_inactive text text_type_main-default mr-1'>Забыли пароль?</span>
               <Link
                 to="/forgot-password"

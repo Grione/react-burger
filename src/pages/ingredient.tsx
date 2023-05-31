@@ -3,13 +3,6 @@ import { useParams } from 'react-router-dom';
 import { useSelector } from '../services/hooks';
 import ingredientDetailsStyles from '../components/ingredient-details/ingredient-details.module.css';
 
-const styles = {
-  display: 'flex',
-  justifyContent: 'center',
-  width: '100%',
-  paddingTop: '120px'
-}
-
 export const IngredientPage: FC = () => {
   const { id } = useParams();
   const ingredients = useSelector((state) => state.ingredients.ingredients);
@@ -18,7 +11,7 @@ export const IngredientPage: FC = () => {
   if (!ingredient) return null;
   return (
     <>
-      <div style={styles}>
+      <div className={ingredientDetailsStyles.container}>
         <div className={ingredientDetailsStyles.wrapper}>
           <h2 className='text text_type_main-large'>Детали ингредиента</h2>
           <div className={ingredientDetailsStyles.image}>
