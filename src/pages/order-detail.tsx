@@ -22,23 +22,33 @@ export function OrderDetailPage() {
 
   if (order.ingredients && allIngredients.length > 0) {
     const ingrObjects = order.ingredients.map((id) => allIngredients.find((ingr) => ingr._id === id));
-    const isIngrObjects = ingrObjects.some((el) => el === undefined || el === null)
+
+    const currentIngredients:any = [];
+    ingrObjects.forEach((ingredient:any)=> {
+      if(!currentIngredients.includes(ingredient)) {
+        ingredient.quantity = 1;
+        currentIngredients.push(ingredient)
+      } else {
+        currentIngredients.find((el:any)=> el._id === ingredient._id).quantity += 1;
+      }
+    });
+
     let totalPrice;
     let prices = [];
 
     let ingredients = null;
 
-    if (!isIngrObjects && ingrObjects.length > 0) {
+    if (currentIngredients.length > 0) {
       prices = ingrObjects.map((obj) => obj!.price);
       totalPrice = prices.reduce((acc, price) => price + acc, 0);
 
-      ingredients = ingrObjects.map((el) =>
+      ingredients = currentIngredients.map((el:any) =>
       (
         <li className={Styles.card} key={el?._id}>
           {el?.image_mobile ? <FeedIngredientIcon src={el?.image_mobile} srcSet={el?.image_mobile} zIndex={1} /> : ''}
           <h2 className="text text_type_main-default ml-4">{el?.name}</h2>
           <div className={Styles.total}>
-            <span className="text text_type_digits-default ml-4">{`${el?.price}`}</span>
+            <span className="text text_type_digits-default ml-4">{`${el.quantity} x ${el?.price}`}</span>
             <CurrencyIcon type="primary" />
           </div>
         </li>
