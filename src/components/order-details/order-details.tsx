@@ -1,9 +1,9 @@
 import orderDetailsStyles from './order-details.module.css';
 import doneIcon from '../../images/done.svg';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/hooks';
 
 function OrderDetails() {
-  const id = useSelector((state: any) => state.order.order)
+  const id = useSelector((state) => state.order.order)
 
   return (
     <div className={orderDetailsStyles.wrapper}>

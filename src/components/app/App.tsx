@@ -1,8 +1,9 @@
 import { FC, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../services/hooks";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { getUser } from "../../services/actions/auth-actions";
 import AppHeader from '../app-header/app-header';
+import ProfileForm from '../profile/profile-form';
 import {
   HomePage,
   LoginPage,
@@ -11,17 +12,20 @@ import {
   ResetPassword,
   ProfilePage,
   IngredientPage,
-  NotFound404
+  FeedPage,
+  OrderDetailPage,
+  NotFound404,
 } from '../../pages';
 import { ProtectedRouteElement } from "../protected-route-element/proptected-route-element";
 import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import { getIngredients } from "../../services/actions/ingredients-actions";
+import { OrdersHistory } from "../orders-history/orders-history";
 
 
 const App: FC = () => {
 
-  const dispatch = useDispatch<any>();
+  const dispatch = useDispatch();
   const location = useLocation();
   const background = location.state && location.state.background;
 
@@ -53,9 +57,16 @@ const App: FC = () => {
               element={<ResetPassword />} />} />
           <Route path="/profile"
             element={<ProtectedRouteElement element={<ProfilePage />} />}>
-            <Route path="orders" element={<p>Orders</p>} />
+            <Route path="" element={<ProfileForm />} />
+            <Route path="orders" element={<OrdersHistory />} />
+          </Route>
+          <Route path="/profile/orders/:id"
+            element={<ProtectedRouteElement element={<OrderDetailPage />} />}>
           </Route>
           <Route path="/ingredient/:id" element={<IngredientPage />} />
+          <Route path="/feed" element={<FeedPage />} />
+
+          <Route path="/feed/:id" element={<OrderDetailPage />} />
           <Route path="*" element={<NotFound404 />} />
         </Routes>
         {
@@ -66,6 +77,8 @@ const App: FC = () => {
                 element={<Modal title="Детали ингредиента">
                   <IngredientDetails />
                 </Modal>} />
+              <Route path="/profile/orders/:id" element={<Modal title=""><OrderDetailPage /></Modal>} />
+              <Route path="/feed/:id" element={<Modal title=""><OrderDetailPage /></Modal>} />
             </Routes>
           )
         }

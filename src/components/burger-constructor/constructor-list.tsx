@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from '../../services/hooks';
 import ConstructorCard from './constructor-card';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import BlankIngredient from './blank-ingredient';
@@ -8,8 +8,8 @@ import { ADD_INGREDIENT, ADD_BUN } from '../../services/action-types';
 import { TIngredient } from '../../types';
 
 function ConstructorList() {
-  const bun = useSelector((state: any) => state.ingredients.constructorBun[0])
-  const ingredients = useSelector((state: any) => state.ingredients.constructorIngredients)
+  const bun = useSelector((state) => state.ingredients.constructorBun[0])
+  const ingredients = useSelector((state) => state.ingredients.constructorIngredients)
 
   const dispatch = useDispatch();
 

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../services/hooks';
 import { useNavigate } from 'react-router-dom';
 import styles from './login.module.css';
 import { Button, EmailInput, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components'
@@ -11,8 +11,8 @@ export function RegisterPage() {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
 
-  const { isLoading } = useSelector((state: any) => state.user);
-  const dispatch = useDispatch<any>();
+  const { isLoading } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -27,7 +27,7 @@ export function RegisterPage() {
     setName(e.target.value)
   }
 
-  const submitHandler = (e:React.FormEvent<HTMLFormElement>) => {
+  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(registerUser(
       {
@@ -65,12 +65,12 @@ export function RegisterPage() {
                 value={password}
               />
             </div>
-            <div className='mb-20' style={{ textAlign: "center" }}>
+            <div className={`mb-20 ${styles.title}`}>
               <Button htmlType="submit" disabled={isLoading}>Зарегистрироваться</Button>
             </div>
           </form>
           <div className="actions">
-            <div style={{ textAlign: 'center' }}>
+            <div className={styles.title}>
               <span className='text_color_inactive text text_type_main-default mr-1'>Уже зарегистрированы?</span>
               <Link to="/login" className='text text_type_main-default text_color_accent'>Войти</Link>
             </div>

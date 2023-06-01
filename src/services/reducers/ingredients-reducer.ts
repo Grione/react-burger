@@ -10,7 +10,18 @@ import {
   REORDER_INGREDIENTS
 } from '../action-types';
 
-const initialState: any = {
+import { TIngredient } from '../../types';
+import { TUnionAction } from '../actions/interfaces';
+
+type TInitialState = {
+  isLoading: boolean,
+  hasError: boolean,
+  ingredients: Array<TIngredient>,
+  constructorIngredients: Array<TIngredient>,
+  constructorBun: Array<TIngredient>
+}
+
+const initialState: TInitialState = {
   isLoading: true,
   hasError: false,
   ingredients: [],
@@ -18,7 +29,7 @@ const initialState: any = {
   constructorBun: []
 }
 
-const ingredientsReducer = (state = initialState, action: { type: string, payload?: any }) => {
+const ingredientsReducer = (state = initialState, action: TUnionAction): TInitialState => {
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST:
       return {
@@ -41,18 +52,33 @@ const ingredientsReducer = (state = initialState, action: { type: string, payloa
         hasError: true
       }
     case ADD_INGREDIENT:
+      const isIngr = state.ingredients.find((item) => item._id === action.payload);
+      if (isIngr) {
+        return {
+          ...state,
+          constructorIngredients: [...state.constructorIngredients, { ...isIngr, key: uuidv4() }]
+        }
+      }
       return {
-        ...state,
-        constructorIngredients: [...state.constructorIngredients,
-        { ...state.ingredients.find((item: any) => item._id === action.payload), key: uuidv4() }
-        ],
+        ...state
+      }
 
-      };
+    case ADD_BUN:
+      const isIngrBun = state.ingredients.find((item) => item._id === action.payload);
+      if(isIngrBun) {
+        return {
+          ...state,
+          constructorBun: [isIngrBun]
+        }
+      }
+      return {
+        ...state
+      }
     case REMOVE_INGREDIENT:
       return {
         ...state,
         constructorIngredients: state.constructorIngredients
-          .filter((el:any) => el.key !== action.payload)
+          .filter((el: any) => el.key !== action.payload)
       }
     case REORDER_INGREDIENTS:
       let item = state.constructorIngredients.splice(action.payload.from, 1)[0];
@@ -62,11 +88,7 @@ const ingredientsReducer = (state = initialState, action: { type: string, payloa
         ...state,
         constructorIngredients: newState
       }
-    case ADD_BUN:
-      return {
-        ...state,
-        constructorBun: [state.ingredients.find((item: any) => item._id === action.payload)]
-      }
+
     default:
       return state
   }

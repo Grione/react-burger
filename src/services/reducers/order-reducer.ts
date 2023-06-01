@@ -5,20 +5,30 @@ import {
   CLOSE_ORDER_MODAL
 } from "../action-types";
 
-const initialState = {
+import { TUnionAction } from "../actions/interfaces";
+
+type TInitialState = {
+  isModal: boolean,
+  isLoading: boolean,
+  hasError: boolean,
+  order: string,
+}
+
+const initialState:TInitialState = {
   isModal: false,
   isLoading: false,
   hasError: false,
-  order: ''
+  order: '',
 }
 
-const orderReducer = (state = initialState, action:{type:string, payload:any}) => {
+const orderReducer = (state = initialState, action:TUnionAction):TInitialState => {
   switch (action.type) {
     case GET_ORDER_REQUEST:
       return {
         ...state,
         isLoading: true,
         hasError: false,
+        isModal: true
       };
     case GET_ORDER_SUCCESS: {
       return {

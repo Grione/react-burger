@@ -37,7 +37,7 @@ export function ForgotPassword() {
                 placeholder='Укажите Email'
               />
             </div>
-            <div className='mb-20' style={{ textAlign: "center" }}>
+            <div className={`mb-20 ${styles.title}`}>
               <Button htmlType="button" onClick={onSubmitHandler}>Восстановить</Button>
             </div>
           </div>
@@ -45,7 +45,7 @@ export function ForgotPassword() {
             <p className='text text_type_main-default'>Произошла ошибка</p>
           ) : ''}
           <div className="actions">
-            <div style={{ textAlign: 'center' }}>
+            <div className={styles.title}>
               <span className='text_color_inactive text text_type_main-default mr-1'>Вспомнили пароль?</span>
               <Link to="/login" className='text text_type_main-default text_color_accent'>Войти</Link>
             </div>

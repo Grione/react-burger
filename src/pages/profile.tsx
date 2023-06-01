@@ -1,8 +1,7 @@
 
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../services/hooks';
 import styles from './profile.module.css';
-import ProfileForm from '../components/profile/profile-form';
 import { logOut } from '../services/actions/auth-actions';
 import { deleteCookie } from '../utils/cookie';
 
@@ -11,13 +10,13 @@ export function ProfilePage() {
   const activeClasses = `text text_type_main-medium`;
   const inactiveClasses = `text_color_inactive text text_type_main-medium`;
 
-  const dispatch = useDispatch<any>();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const logoutHandler = () => {
     dispatch(logOut(() => {
-      navigate('/login');
       deleteCookie('accessToken');
+      navigate('/login');
     }));
   }
 
@@ -52,7 +51,6 @@ export function ProfilePage() {
             изменить свои персональные данные</p>
         </div>
         <div>
-          <ProfileForm />
           <Outlet />
         </div>
       </div>

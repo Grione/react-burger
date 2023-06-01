@@ -24,10 +24,10 @@ import {
 } from "../action-types";
 
 import { TLogin, TRegister } from "../../types";
+import { AppThunk } from "../../types";
 
 
-
-export const loginUser = (form: TLogin, cb: () => void) => (dispatch: any) => {
+export const loginUser:AppThunk = (form: TLogin, cb: () => void) => (dispatch) => {
   dispatch({
     type: LOGIN_USER_REQUEST
   });
@@ -52,7 +52,7 @@ export const loginUser = (form: TLogin, cb: () => void) => (dispatch: any) => {
   })
 }
 
-export const registerUser = (form: TRegister, cb: () => void) => (dispatch: any) => {
+export const registerUser:AppThunk = (form: TRegister, cb: () => void) => (dispatch) => {
   dispatch({
     type: REGISTER_USER_REQUEST
   });
@@ -74,7 +74,7 @@ export const registerUser = (form: TRegister, cb: () => void) => (dispatch: any)
   })
 }
 
-export const getUser = () => (dispatch: any) => {
+export const getUser:AppThunk = () => (dispatch) => {
   dispatch({
     type: GET_USER_REQUEST
   });
@@ -97,7 +97,7 @@ export const getUser = () => (dispatch: any) => {
     })
 }
 
-export const changeUser = (form: TRegister) => (dispatch: any) => {
+export const changeUser:AppThunk = (form: TRegister) => (dispatch) => {
   dispatch({
     type: GET_USER_REQUEST
   });
@@ -119,7 +119,7 @@ export const changeUser = (form: TRegister) => (dispatch: any) => {
   })
 }
 
-export const logOut = (cb: () => void) => (dispatch: any) => {
+export const logOut:AppThunk = (cb: () => void) => (dispatch) => {
   dispatch({
     type: LOGOUT_USER_REQUEST
   });
@@ -136,7 +136,7 @@ export const logOut = (cb: () => void) => (dispatch: any) => {
   })
 }
 
-const refreshToken = (afterRefresh: any) => (dispatch: any) => {
+const refreshToken:AppThunk = (afterRefresh) => (dispatch) => {
   refreshTokenRequest()
     .then((res: any) => {
       saveTokens(res.refreshToken, res.accessToken);

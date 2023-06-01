@@ -1,0 +1,53 @@
+.main {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  text-align: center;
+}
+
+.ingredients {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 320px;
+  overflow: auto;
+}
+
+.ingredients::-webkit-scrollbar {
+  width: 8px;
+}
+
+.ingredients::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+
+.ingredients::-webkit-scrollbar-thumb {
+  background-color: #8585AD;
+}
+
+.card {
+  width: 100%;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+}
+
+.total {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-left: auto;
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

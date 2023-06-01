@@ -1,5 +1,5 @@
 import { useMemo, FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from '../../services/hooks';
 import { useNavigate } from 'react-router-dom';
 import { GET_ORDER_REQUEST, GET_ORDER_SUCCESS, GET_ORDER_ERROR, CLOSE_ORDER_MODAL } from '../../services/action-types';
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -13,29 +13,34 @@ import ConstructorStyles from './burger-constructor.module.css';
 const BurgerConstructor: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isModal = useSelector((state: any) => state.order.isModal);
+  const isModal = useSelector((store) => store.order.isModal);
 
-  const ingredients = useSelector((state: any) => state.ingredients.constructorIngredients);
-  const { isAuthenticated } = useSelector((state: any) => state.user);
+  const ingredients = useSelector((state) => state.ingredients.constructorIngredients);
 
-  const bun = useSelector((state: any) => state.ingredients.constructorBun[0]);
+  const { isAuthenticated } = useSelector((state) => state.user);
+
+  const bun = useSelector((state) => state.ingredients.constructorBun[0]);
 
   const totalPrice = useMemo(() => {
-    if (ingredients.length || bun) {
+    if (ingredients.length > 0 || bun) {
       return ingredients.reduce(
         (acc: number, current: TIngredient) => { return acc + current.price }, 0) + (bun ? bun.price * 2 : 0)
     }
   }, [ingredients, bun]);
 
-
-  function sendOrder(ingredients: []) {
-    if (!ingredients.length) return;
+  function sendOrder(ingredients:any) {
+    if (ingredients.length === 0) {
+      return;
+    }
     if (!isAuthenticated) {
       navigate('/login');
       return;
     }
+    
     const ids = [...ingredients.map((el: TIngredient) => el._id), bun._id];
-    dispatch({ type: GET_ORDER_REQUEST })
+
+    dispatch({ type: GET_ORDER_REQUEST });
+
     postOrder(ids).then((data: any) => {
       dispatch({ type: GET_ORDER_SUCCESS, payload: data.order.number })
     })

@@ -1,0 +1,63 @@
+.wrapper {
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: 60px;
+}
+
+.done {
+  color: #00CCCC;
+}
+
+.list {
+  height: 75vh;
+  display: flex;
+  flex-direction: column;
+  padding-right: 15px;
+  gap: 16px;
+  overflow: auto;
+  flex: 1;
+}
+
+.list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.list::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+
+.list::-webkit-scrollbar-thumb {
+  background-color: #8585AD;
+}
+
+.ingredient {
+  max-width: 50px;
+
+}
+
+.ingredient:first-child {
+  transform: initial;
+}
+
+.ingredient img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border: 2px solid #801AB2;
+  border-radius: 50%;
+  background: #131316;
+}
+
+.info {
+  flex: 1;
+  display: flex;
+  gap: 36px;
+}
+
+.col {
+  flex: 1;
+}
