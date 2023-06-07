@@ -52,7 +52,7 @@ const ingredientsReducer = (state = initialState, action: TUnionAction): TInitia
         hasError: true
       }
     case ADD_INGREDIENT:
-      const isIngr = state.ingredients.find((item) => item._id === action.payload);
+      const isIngr = state.ingredients?.find((item) => item._id === action.payload);
       if (isIngr) {
         return {
           ...state,
@@ -64,8 +64,8 @@ const ingredientsReducer = (state = initialState, action: TUnionAction): TInitia
       }
 
     case ADD_BUN:
-      const isIngrBun = state.ingredients.find((item) => item._id === action.payload);
-      if(isIngrBun) {
+      const isIngrBun = state.ingredients?.find((item) => item._id === action.payload);
+      if (isIngrBun) {
         return {
           ...state,
           constructorBun: [isIngrBun]
@@ -77,8 +77,7 @@ const ingredientsReducer = (state = initialState, action: TUnionAction): TInitia
     case REMOVE_INGREDIENT:
       return {
         ...state,
-        constructorIngredients: state.constructorIngredients
-          .filter((el: any) => el.key !== action.payload)
+        constructorIngredients: state.constructorIngredients?.filter((el: any) => el.key !== action.payload)
       }
     case REORDER_INGREDIENTS:
       let item = state.constructorIngredients.splice(action.payload.from, 1)[0];
