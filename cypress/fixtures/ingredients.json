@@ -1,8 +1,9 @@
 {
-  "ingredients": [
+  "success": true, 
+  "data": [
     {
-      "_id": "60d3b41abdacab0026a733c6",
-      "name": "Краторная булка N-200i",
+      "_id": "1",
+      "name": "Булка 1",
       "type": "bun",
       "proteins": 80,
       "fat": 24,
@@ -15,8 +16,8 @@
       "__v": 0
     },
     {
-      "_id": "60d3b41abdacab0026a733cc",
-      "name": "Соус Spicy-X",
+      "_id": "2",
+      "name": "Соус 1",
       "type": "sauce",
       "proteins": 30,
       "fat": 20,
@@ -29,8 +30,8 @@
       "__v": 0
     },
     {
-      "_id": "60d3b41abdacab0026a733c8",
-      "name": "Филе Люминесцентного тетраодонтимформа",
+      "_id": "3",
+      "name": "Начинка 1",
       "type": "main",
       "proteins": 44,
       "fat": 26,

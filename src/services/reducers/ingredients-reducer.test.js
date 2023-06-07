@@ -83,10 +83,24 @@ describe('ingredients reducer', () => {
   })
   it('should handle remove ingredient', () => {
     expect(reducer({}, {
-      type: types.REMOVE_INGREDIENT,
-      payload: 1
+      type: types.REMOVE_INGREDIENT
     })).toEqual({
       ...state,
+    })
+  })
+  it('should handle reorder ingredient', () => {
+    let item = state.constructorIngredients?.splice(1, 1)[0];
+    let newState = [...state.constructorIngredients];
+    newState.splice(2, 0, item)
+    expect(reducer({}, {
+      type: types.REORDER_INGREDIENTS,
+      payload: {
+        from: 1, 
+        to: 2
+      }
+    })).toEqual({
+      ...state,
+      constructorIngredients: newState
     })
   })
 }) 

@@ -47,7 +47,7 @@ const Modal: FC<PropsWithChildren<IModalProps>> = (props) => {
       <div className={`${modalStyles.modal} p-10 pb-15`}>
         <div className={modalStyles.header}>
           <h3 className="text text_type_main-large">{title}</h3>
-          <button className={modalStyles.close} onClick={closeHandler}>
+          <button className={modalStyles.close} onClick={closeHandler} data-test="close-button">
             <CloseIcon type="primary" />
           </button>
         </div>

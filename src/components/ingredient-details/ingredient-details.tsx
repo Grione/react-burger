@@ -17,7 +17,7 @@ const IngredientDetails: FC = () => {
         <div className={ingredientDetailsStyles.image}>
           <img src={ingredient.image_large} alt="" />
         </div>
-        <h4 className={`text text_type_main-medium title mt-4`}>{ingredient.name}</h4>
+        <h4 className={`text text_type_main-medium title mt-4`} data-test="modal-title">{ingredient.name}</h4>
         <ul className={`mt-8 ${ingredientDetailsStyles.list}`}>
           <li className={ingredientDetailsStyles.item}>
             <span className="text text_type_main-default text_color_inactive">Калории,ккал</span>

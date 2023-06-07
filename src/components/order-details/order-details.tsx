@@ -7,7 +7,7 @@ function OrderDetails() {
 
   return (
     <div className={orderDetailsStyles.wrapper}>
-      <div className={`text text_type_digits-large ${orderDetailsStyles.id}`}>{id}</div>
+      <div className={`text text_type_digits-large ${orderDetailsStyles.id}`} data-test="order-id">{id}</div>
       <span className='mt-8 text text_type_main-medium'>идентификатор заказа</span>
       <div className={orderDetailsStyles.icon}>
         <img src={doneIcon} alt="" />
