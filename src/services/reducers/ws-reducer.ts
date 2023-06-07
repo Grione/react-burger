@@ -17,7 +17,7 @@ import {
   IAction,
 } from "../../types";
 
-const initialState: IWsState = {
+export const initialState: IWsState = {
   wsConnected: false,
   orders: [],
   error: "",

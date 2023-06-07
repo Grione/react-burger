@@ -62,4 +62,4 @@ const orderReducer = (state = initialState, action:TUnionAction):TInitialState =
   }
 }
 
-export { orderReducer };
+export { orderReducer, initialState };

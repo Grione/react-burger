@@ -1,10 +1,58 @@
 import {
   ingredientsReducer as reducer,
-  initialState as state
+  initialState as initState
 } from './ingredients-reducer';
 
-import * as types from '../action-types'
+import * as types from '../action-types';
 
+
+const state = {
+  ...initState,
+  ingredients: [{
+    _id: "1",
+    name: "Краторная булка N-200i",
+    type: "bun",
+    proteins: 80,
+    fat: 24,
+    carbohydrates: 53,
+    calories: 420,
+    price: 1255,
+    image: "https://code.s3.yandex.net/react/code/bun-02.png",
+    image_mobile: "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
+    image_large: "https://code.s3.yandex.net/react/code/bun-02-large.png",
+    __v: 0,
+    key: "12345"
+  },
+  {
+    _id: "2",
+    name: "Краторная булка N-200i",
+    type: "bun",
+    proteins: 80,
+    fat: 24,
+    carbohydrates: 53,
+    calories: 420,
+    price: 1255,
+    image: "https://code.s3.yandex.net/react/code/bun-02.png",
+    image_mobile: "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
+    image_large: "https://code.s3.yandex.net/react/code/bun-02-large.png",
+    __v: 0
+  },
+  {
+    _id: "3",
+    name: "Краторная булка N-200i",
+    type: "bun",
+    proteins: 80,
+    fat: 24,
+    carbohydrates: 53,
+    calories: 420,
+    price: 1255,
+    image: "https://code.s3.yandex.net/react/code/bun-02.png",
+    image_mobile: "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
+    image_large: "https://code.s3.yandex.net/react/code/bun-02-large.png",
+    __v: 0,
+    key: "12345"
+  }]
+}
 
 describe('ingredients reducer', () => {
   const ingr = [
@@ -26,16 +74,13 @@ describe('ingredients reducer', () => {
   it('should return the initial state', () => {
     expect(reducer(undefined, {})).toEqual(
       {
-        isLoading: true,
-        hasError: false,
-        ingredients: [],
-        constructorIngredients: [],
-        constructorBun: []
+        ...initState
       }
+
     )
   })
   it('should handle get ingredients request', () => {
-    expect(reducer({}, {
+    expect(reducer(state, {
       type: types.GET_INGREDIENTS_REQUEST
     })).toEqual({
       ...state,
@@ -43,20 +88,21 @@ describe('ingredients reducer', () => {
       hasError: false
     })
   })
+
   it('should handle get ingredients success', () => {
 
-    expect(reducer({}, {
+    expect(reducer(state, {
       type: types.GET_INGREDIENTS_SUCCESS,
       payload: ingr
     })).toEqual({
-        ...state,
-        isLoading: false,
-        hasError: false,
-        ingredients: ingr
-      })
+      ...state,
+      isLoading: false,
+      hasError: false,
+      ingredients: ingr
+    })
   })
   it('should handle get ingredients error', () => {
-    expect(reducer({}, {
+    expect(reducer(state, {
       type: types.GET_INGREDIENTS_ERROR
     })).toEqual({
       ...state,
@@ -65,37 +111,65 @@ describe('ingredients reducer', () => {
       hasError: true
     })
   })
+
   it('should handle add ingredient', () => {
-    expect(reducer({}, {
+
+    expect(reducer(state, {
       type: types.ADD_INGREDIENT,
-      payload: "643d69a5c3f7b9001cfa093c"
+      payload: "3",
+      key: "12345"
     })).toEqual({
       ...state,
+      constructorIngredients: [...state.constructorIngredients, { ...state.ingredients.find((e) => e._id === "3"), key: "12345" }]
     })
   })
   it('should handle add bun', () => {
-    expect(reducer({}, {
+    expect(reducer(state, {
       type: types.ADD_BUN,
-      payload: "643d69a5c3f7b9001cfa093c"
+      payload: "1"
     })).toEqual({
       ...state,
+      constructorBun: [state.ingredients.find((i) => i._id === "1")]
     })
   })
+
   it('should handle remove ingredient', () => {
-    expect(reducer({}, {
-      type: types.REMOVE_INGREDIENT
+    const iState = {
+      ...state,
+      constructorIngredients: [{ key: "2" }]
+    }
+    expect(reducer(iState, {
+      type: types.REMOVE_INGREDIENT,
+      payload: "2"
     })).toEqual({
       ...state,
+      constructorIngredients: iState.constructorIngredients.filter((el) => el.key !== "2")
     })
   })
   it('should handle reorder ingredient', () => {
-    let item = state.constructorIngredients?.splice(1, 1)[0];
-    let newState = [...state.constructorIngredients];
-    newState.splice(2, 0, item)
-    expect(reducer({}, {
+    const iState = {
+      ...state,
+      constructorIngredients: [
+        {
+          _id: "1"
+        }, 
+        {
+          _id: "2"
+        },
+        {
+          _id: "3"
+        }
+      ]
+    }
+
+    let item = iState.constructorIngredients.splice(1, 1)[0];
+    let newState = [...iState.constructorIngredients];
+    newState.splice(2, 0)
+
+    expect(reducer(iState, {
       type: types.REORDER_INGREDIENTS,
       payload: {
-        from: 1, 
+        from: 1,
         to: 2
       }
     })).toEqual({
