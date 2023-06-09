@@ -72,18 +72,24 @@ describe('service is available', function () {
   it('should close ingredient details by button', function () {
     cy.get('[data-test="Булка 1"]').click()
     cy.get('[data-test="close-button"]').click();
+    cy.get('[data-test="modal"]').should('not.exist')
+    cy.get('[data-test="modal-overlay"]').should('not.exist')
     cy.visit('/');
   });
 
   it('should close ingredient details by overlay', function () {
     cy.get('[data-test="Булка 1"]').click()
     cy.get('[data-test="modal-overlay"]').click({ force: true });
+    cy.get('[data-test="modal"]').should('not.exist')
+    cy.get('[data-test="modal-overlay"]').should('not.exist')
     cy.visit('/');
   });
 
   it('should dragndrop ingredients', function () {
     cy.get('[data-test="Булка 1"]').drag('[data-test="constructor"]')
     cy.get('[data-test="Начинка 1"]').drag('[data-test="constructor"]')
+    cy.get('[data-test="constructor"]').contains('Булка 1')
+    cy.get('[data-test="constructor"]').contains('Начинка 1')
   })
 
   it('should open order number', function () {

@@ -75,7 +75,7 @@ const ingredientsReducer = (state = initialState, action: TUnionAction): TInitia
     case REMOVE_INGREDIENT:
       return {
         ...state,
-        constructorIngredients: state.constructorIngredients.filter((el: any) => el.key !== action.payload)
+        constructorIngredients: state.constructorIngredients.filter((el:TIngredient) => el.key !== action.payload)
       }
     case REORDER_INGREDIENTS:
       let item = state.constructorIngredients.splice(action.payload.from, 1)[0];

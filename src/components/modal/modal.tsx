@@ -43,8 +43,7 @@ const Modal: FC<PropsWithChildren<IModalProps>> = (props) => {
 
   return ReactDOM.createPortal(
     (<>
-
-      <div className={`${modalStyles.modal} p-10 pb-15`}>
+      <div className={`${modalStyles.modal} p-10 pb-15`} data-test="modal">
         <div className={modalStyles.header}>
           <h3 className="text text_type_main-large">{title}</h3>
           <button className={modalStyles.close} onClick={closeHandler} data-test="close-button">
