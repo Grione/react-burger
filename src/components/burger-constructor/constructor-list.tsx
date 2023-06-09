@@ -6,6 +6,7 @@ import ConstructorListStyles from './constructor-list.module.css';
 import { useDrop } from 'react-dnd/dist/hooks';
 import { ADD_INGREDIENT, ADD_BUN } from '../../services/action-types';
 import { TIngredient } from '../../types';
+import { v4 as uuidv4 } from 'uuid';
 
 function ConstructorList() {
   const bun = useSelector((state) => state.ingredients.constructorBun[0])
@@ -19,7 +20,7 @@ function ConstructorList() {
       if (item.type === 'bun') {
         dispatch({ type: ADD_BUN, payload: item.id });
       } else {
-        dispatch({ type: ADD_INGREDIENT, payload: item.id });
+        dispatch({ type: ADD_INGREDIENT, payload: item.id, key:uuidv4() });
       }
     },
   });

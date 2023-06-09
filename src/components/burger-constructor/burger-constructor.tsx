@@ -52,7 +52,7 @@ const BurgerConstructor: FC = () => {
 
   return (
     <>
-      <div className={ConstructorStyles['constructor']}>
+      <div className={ConstructorStyles['constructor']} data-test="constructor">
         <ConstructorList />
         {totalPrice && <div className={`pt-10 ${ConstructorStyles['constructor-footer']}`}>
           <div className={ConstructorStyles.total}>
@@ -61,7 +61,7 @@ const BurgerConstructor: FC = () => {
             </span>
             <CurrencyIcon type="primary" />
           </div>
-          <Button htmlType="button" type="primary" size="large"
+          <Button htmlType="button" type="primary" size="large" data-test="order-button"
             onClick={() => { sendOrder(ingredients) }}>
             Оформить заказ
           </Button>

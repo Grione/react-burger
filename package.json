@@ -2,11 +2,11 @@
   "name": "react-burger",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://grione.github.io/react-burger",
   "dependencies": {
     "@redux-devtools/extension": "^3.2.5",
     "@reduxjs/toolkit": "^1.9.1",
     "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.18.11",
@@ -31,7 +31,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -52,6 +54,13 @@
     ]
   },
   "devDependencies": {
-    "@types/uuid": "^9.0.1"
+    "@4tw/cypress-drag-drop": "^2.2.4",
+    "@testing-library/react": "^14.0.0",
+    "@types/uuid": "^9.0.1",
+    "cypress": "^12.13.0",
+    "eslint-plugin-cypress": "^2.13.3",
+    "fetch-mock": "^9.11.0",
+    "gh-pages": "^5.0.0",
+    "redux-mock-store": "^1.5.4"
   }
 }

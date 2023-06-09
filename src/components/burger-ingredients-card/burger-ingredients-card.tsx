@@ -22,7 +22,7 @@ function BurgerIngredientsCard({ card }: { card: TIngredient }) {
 
   return (
     <>
-      <li className={BurgerIngredientsCardStyles.card} ref={dragRef} >
+      <li className={BurgerIngredientsCardStyles.card} ref={dragRef} data-test={card.name}>
         <Link
           className={BurgerIngredientsCardStyles.link}
           to={`/ingredient/${card._id}`}

@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
-
 import {
   GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS,
@@ -56,7 +54,7 @@ const ingredientsReducer = (state = initialState, action: TUnionAction): TInitia
       if (isIngr) {
         return {
           ...state,
-          constructorIngredients: [...state.constructorIngredients, { ...isIngr, key: uuidv4() }]
+          constructorIngredients: [...state.constructorIngredients, { ...isIngr, key: action.key }]
         }
       }
       return {
@@ -65,7 +63,7 @@ const ingredientsReducer = (state = initialState, action: TUnionAction): TInitia
 
     case ADD_BUN:
       const isIngrBun = state.ingredients.find((item) => item._id === action.payload);
-      if(isIngrBun) {
+      if (isIngrBun) {
         return {
           ...state,
           constructorBun: [isIngrBun]
@@ -77,8 +75,7 @@ const ingredientsReducer = (state = initialState, action: TUnionAction): TInitia
     case REMOVE_INGREDIENT:
       return {
         ...state,
-        constructorIngredients: state.constructorIngredients
-          .filter((el: any) => el.key !== action.payload)
+        constructorIngredients: state.constructorIngredients.filter((el:TIngredient) => el.key !== action.payload)
       }
     case REORDER_INGREDIENTS:
       let item = state.constructorIngredients.splice(action.payload.from, 1)[0];
@@ -96,4 +93,4 @@ const ingredientsReducer = (state = initialState, action: TUnionAction): TInitia
 
 
 
-export { ingredientsReducer }
+export { ingredientsReducer, initialState }

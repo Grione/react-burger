@@ -1,5 +1,7 @@
 # Getting Started with Create React App
 
+# url of the project: https://grione.github.io/react-burger/index.html
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

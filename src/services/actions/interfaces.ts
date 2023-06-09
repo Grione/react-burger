@@ -124,6 +124,7 @@ export interface IGetIngredientsError {
 export interface IAddIngredient {
   readonly type: typeof ADD_INGREDIENT,
   readonly payload: string
+  key: string
 }
 
 export interface IAddBun {
@@ -164,6 +165,7 @@ export interface ICloseModal {
 export interface IWsAction {
   type: string;
   payload: any;
+  key?: string
 }
 
 export interface IUserWsConnectionStart {

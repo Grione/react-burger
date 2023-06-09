@@ -17,7 +17,7 @@ export function OrdersHistory() {
 
   const socket = useSelector((state) => state.userWsReducer.orders);
 
-  if (socket.length > 0) {
+  if (socket && socket.length > 0) {
     const orders = socket.map((order: any, index: number) => {
       return (
         <FeedCard
