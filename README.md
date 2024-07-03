@@ -1,48 +1,27 @@
-# Getting Started with Create React App
+# Burger Ordering App (React JS)
 
-# url of the project: https://grione.github.io/react-burger/index.html
+<a href="https://grione.github.io/react-burger/index.html" target="_blank">Live demo</a> <br>
+To order, you will need to register. You can use any email.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![App screenshot](https://private-user-images.githubusercontent.com/35578611/345383837-031dcdea-92a4-4f46-ab05-11c3b807dc8f.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MjAwMDI1ODUsIm5iZiI6MTcyMDAwMjI4NSwicGF0aCI6Ii8zNTU3ODYxMS8zNDUzODM4MzctMDMxZGNkZWEtOTJhNC00ZjQ2LWFiMDUtMTFjM2I4MDdkYzhmLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDA3MDMlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwNzAzVDEwMjQ0NVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWI0MGVhODdiOWIxYTM0NGIwYmEyMDU0ZTA3M2EzOTgzNDZlNDYwNTc3ZmU2ZTNkZmNlMzllZTBmOGFkYjEyNjkmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.ZxLNw-ZueerIiey1dMjx-pdr-vSihzZCzU8o0bybsxk)
 
-## Available Scripts
+## Description
 
-In the project directory, you can run:
+This app allows you to assemble your burger from the ingredients. You can place an order on the test server.
 
-### `npm start`
+## Stack
+- React TS (Redux) 
+- HTML5
+- CSS
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Features
+- Implemented dnd functionality for ingredients
+- There is a basic authorization functionality on the server
+- TypeScript in action
+- Personal account with order history
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## How to run locally
+- install dependencies on the root folder
+``` npm install ```
+- start the project
+``` npm run start ```
