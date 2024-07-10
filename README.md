@@ -7,18 +7,21 @@ To order, you will need to register. You can use any email.
 
 ## Description
 
-This app allows you to assemble your burger from the ingredients. You can place an order on the test server.
+This app allows you to assemble your burger from the ingredients. You can place an order on the test server. This app available only for desktop screens.
 
 ## Stack
-- React TS (Redux) 
+- React TS (Redux)
+- Jest and Cypress
 - HTML5
 - CSS
 
 ## Features
-- Implemented dnd functionality for ingredients
-- There is a basic authorization functionality on the server
-- TypeScript in action
-- Personal account with order history
+- Burger assembly (using React Drag and Drop)
+- view detailed information about the ingredient (Pop—up window)
+- view the order feed with details of a specific order (WebSocket connection is configured)
+- registration / authorization
+- the ability to reset and restore the password
+- editing user data in the personal account and viewing the order history
 
 ## How to run locally
 - install dependencies on the root folder
